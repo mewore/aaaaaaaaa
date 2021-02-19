@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/options/OptionContainer.gd" type="Script" id=1]
+
+[node name="OptionContainer" type="VBoxContainer"]
+margin_top = 50.0
+margin_right = 256.0
+margin_bottom = 133.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+title = "Title"
+visible_option_count = 5
+WRAP_TYPE = 0
+options = PoolStringArray( "Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6" )
+
+[node name="Title" type="Label" parent="."]
+self_modulate = Color( 0.317647, 0.321569, 0.384314, 1 )
+margin_right = 256.0
+margin_bottom = 14.0
+text = "Title"
+align = 1
+
+[node name="List" type="Label" parent="."]
+self_modulate = Color( 0.545098, 0.25098, 0.286275, 1 )
+margin_top = 18.0
+margin_right = 256.0
+margin_bottom = 100.0
+text = "[ Option 1 ]
+Option 2
+Option 3
+Option 4
+Option 5"
+align = 1

@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/default-theme.tres" type="Theme" id=1]
+[ext_resource path="res://ui/options/OptionContainer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/MainMenu.gd" type="Script" id=3]
+[ext_resource path="res://ui/main-menu/background.png" type="Texture" id=4]
+
+[node name="MainMenu" type="VBoxContainer"]
+margin_right = 512.0
+margin_bottom = 296.0
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+centered = false
+offset = Vector2( 0, -150 )
+
+[node name="Offset" type="Control" parent="."]
+margin_right = 512.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="OptionWrapper" type="CenterContainer" parent="."]
+margin_top = 24.0
+margin_right = 512.0
+margin_bottom = 296.0
+size_flags_vertical = 3
+
+[node name="OptionContainer" parent="OptionWrapper" instance=ExtResource( 2 )]
+margin_left = 183.0
+margin_top = 59.0
+margin_right = 329.0
+margin_bottom = 212.0
+size_flags_horizontal = 3
+visible_option_count = 4
+WRAP_TYPE = 1
+
+[node name="TipContainer" type="Node2D" parent="."]
+position = Vector2( 8, 248 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Label" type="Label" parent="TipContainer"]
+self_modulate = Color( 0.317647, 0.321569, 0.384314, 1 )
+margin_right = 40.0
+margin_bottom = 14.0
+text = "A - up
+X - down
+[Space bar] - select"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="option_selected" from="OptionWrapper/OptionContainer" to="." method="_on_OptionContainer_option_selected"]
