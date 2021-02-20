@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://entities/player/a/A.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=2]
@@ -8,7 +8,11 @@
 [ext_resource path="res://entities/player/player.png" type="Texture" id=6]
 [ext_resource path="res://entities/advanced-camera2d/AdvancedCamera2D.tscn" type="PackedScene" id=7]
 [ext_resource path="res://entities/player/states/Dead.gd" type="Script" id=8]
+[ext_resource path="res://entities/hp-bar/HpBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/player/states/Winning.gd" type="Script" id=10]
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.236735, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.506122, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
@@ -138,6 +142,7 @@ collision_layer = 0
 collision_mask = 3
 script = ExtResource( 2 )
 SCREAM_SCENE = ExtResource( 1 )
+HP_BAR_OPACITY_CURVE = SubResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -202,6 +207,9 @@ anims/winning = SubResource( 8 )
 
 [node name="ScreamingContainer" type="Node2D" parent="."]
 position = Vector2( 0, -16 )
+
+[node name="HpBar" parent="." instance=ExtResource( 9 )]
+position = Vector2( 0, -24 )
 [connection signal="reached_win_area" from="." to="StateMachine/Moving" method="_on_Player_reached_win_area"]
 [connection signal="timeout" from="StateMachine/Moving/ScreamClear" to="StateMachine/Moving" method="_on_ScreamClear_timeout"]
 [connection signal="timeout" from="StateMachine/Moving/AutoScream" to="StateMachine/Moving" method="_on_AutoScream_timeout"]
