@@ -82,10 +82,12 @@ A< >B
 ### Basic features
 
 - [x] 💙 Prevent the logger from trying to create log files unnecessarily
-- [ ] 💜 Make textures for the blocks and environment that are specific to this game rather than reusing the old ones.
+- [x] 💜 Make textures for the blocks and environment that are specific to this game rather than reusing the old ones.
+- [ ] 💙 When the player HP is low, show the HP bar where the character is
+- [ ] 💙 When the inputs have changed, stop the falling blocks for a while and show the inputs close to the character
 - [ ] 💜 Create a player sprite/animation for this game.
 - [ ] 💟💜 Game icon
-- [ ] 💙 (Performance) Use a one-second timer to update the right-side time label text instead of updatnig it at
+- [ ] 💙 (Performance) Use a one-second timer to update the right-side time label text instead of updating it at
   every `_process` call
 - [ ] 💙 Make the non-pressed control previews slightly transparent so that the controls feel more responsive
 - [ ] 💛 Menu sounds

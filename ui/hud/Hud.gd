@@ -9,11 +9,14 @@ onready var MOVE_RIGHT_INPUT_ICON := $InputWrapper/InputControl/InputPreview/Mov
 onready var JUMP_INPUT_ICON := $InputWrapper/InputControl/InputPreview/Jump/Input as Sprite
 
 onready var TIME_LABEL := $ControlScrambleTimer as Label
+export(Color) var TIME_WARNING_COLOUR: Color
+onready var NORMAL_TIME_COLOUR = TIME_LABEL.self_modulate
 
 onready var HP_BAR := $HpBarWrapper/HpBarControl/HpBar as HpBar
 
 onready var DAMAGE_TAKEN_LABEL := $DamageTaken as Label
 export(int) var DAMAGE_TAKEN_SYMBOLS_PER_LINE := 10
+
 
 var active_timer: Timer
 
@@ -30,8 +33,13 @@ func _process(_delta: float) -> void:
         var time_left_seconds_total := int(floor(active_timer.time_left))
         var minutes_left := int(float(time_left_seconds_total) / 60)
         var seconds_left := time_left_seconds_total % 60
-        TIME_LABEL.text = "%d%d:%d%d" % [int(float(minutes_left) / 10), minutes_left % 10,
+        var time_text := "%d%d:%d%d" % [int(float(minutes_left) / 10), minutes_left % 10,
             int(float(seconds_left) / 10), seconds_left % 10]
+        if time_text != TIME_LABEL.text:
+            TIME_LABEL.text = time_text
+            TIME_LABEL.self_modulate = TIME_WARNING_COLOUR \
+                if TIME_WARNING_COLOUR and (minutes_left == 0 and seconds_left < 10 and seconds_left % 2 == 1) \
+                else NORMAL_TIME_COLOUR
     if PLAYER:
         HP_BAR.set_hp_ratio(PLAYER.hp / Player.MAX_HP)
 

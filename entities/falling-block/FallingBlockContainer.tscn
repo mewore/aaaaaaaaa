@@ -13,4 +13,4 @@ FALLING_BLOCK_SCENE = ExtResource( 2 )
 position = Vector2( 24, 8 )
 
 [node name="RightmostSpawn" type="Position2D" parent="."]
-position = Vector2( 392, 8 )
+position = Vector2( 376, 8 )
