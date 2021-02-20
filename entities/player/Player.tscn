@@ -13,14 +13,13 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Curve" id=2]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.244898, 0.390909 ), 0.0, 0.0, 0, 0, Vector2( 0.412245, 0.8 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=3]
 radius = 4.0
 
-[sub_resource type="Animation" id=3]
-resource_name = "dying"
+[sub_resource type="Animation" id=4]
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -35,7 +34,7 @@ tracks/0/keys = {
 "values": [ 0, 16, 17, 18, 19, 20, 21, 22 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -51,7 +50,7 @@ tracks/0/keys = {
 "values": [ 0, 7 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.3
 loop = true
 step = 0.05
@@ -68,8 +67,7 @@ tracks/0/keys = {
 "values": [ 8, 13 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "winning"
+[sub_resource type="Animation" id=7]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -95,8 +93,7 @@ tracks/1/keys = {
 "values": [  ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "winning"
+[sub_resource type="Animation" id=8]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -174,7 +171,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="Camera" parent="." instance=ExtResource( 7 )]
-SHAKE_INTENSITY_CURVE = SubResource( 8 )
+SHAKE_INTENSITY_CURVE = SubResource( 2 )
 SHAKE_AMPLITUDE = 5.0
 SHAKE_DURATION = 0.5
 
@@ -185,7 +182,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -1 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -2.07583, -3.08058 )
@@ -195,13 +192,13 @@ hframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 autoplay = "idle"
-anims/dying = SubResource( 3 )
-anims/idle = SubResource( 4 )
-anims/walking = SubResource( 5 )
-anims/winning = SubResource( 6 )
+anims/dying = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/walking = SubResource( 6 )
+anims/winning = SubResource( 7 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/winning = SubResource( 7 )
+anims/winning = SubResource( 8 )
 
 [node name="ScreamingContainer" type="Node2D" parent="."]
 position = Vector2( 0, -16 )

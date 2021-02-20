@@ -81,7 +81,7 @@ A< >B
 
 ### Basic features
 
-- [ ] 💙 Prevent the logger from trying to create log files unnecessarily
+- [x] 💙 Prevent the logger from trying to create log files unnecessarily
 - [ ] 💜 Make textures for the blocks and environment that are specific to this game rather than reusing the old ones.
 - [ ] 💜 Create a player sprite/animation for this game.
 - [ ] 💟💜 Game icon

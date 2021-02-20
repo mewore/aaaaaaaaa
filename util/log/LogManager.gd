@@ -15,7 +15,8 @@ var START_TIME: Dictionary = OS.get_datetime()
 
 # Use this on each script you wish to use the Logger
 func get_log(object, log_path: String = DEFAULT_LOG_PATH, log_file: String = DEFAULT_LOG_NAME) -> Log:
-    if not OS.is_debug_build() or not ENABLE_LOGGING:
+    if not OS.is_debug_build() or not ENABLE_LOGGING or OS.has_feature("web") \
+            or not Directory.new().dir_exists(log_path):
         return DummyLog.new()
     return RealLog.new(LogSettings.new(object, log_path, log_file))
 

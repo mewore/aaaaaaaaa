@@ -83,6 +83,9 @@ func celebrate() -> void:
 func win() -> void:
     emit_signal("won")
 
+func die() -> void:
+    emit_signal("dead")
+
 func move(delta: float) -> void:
     if not is_on_floor():
         motion.y = min(motion.y + GRAVITY * delta, MAX_FALL_SPEED)
