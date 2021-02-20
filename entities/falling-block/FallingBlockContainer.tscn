@@ -1,7 +1,40 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://entities/falling-block/FallingBlockContainer.gd" type="Script" id=1]
 [ext_resource path="res://entities/falling-block/FallingBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/falling-block/FallingBlockSettings.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "freeze_blocks"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Settings:speed_multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "unfreeze_blocks"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Settings:speed_multiplier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( -2, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
 
 [node name="FallingBlockContainer" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,3 +47,10 @@ position = Vector2( 24, 8 )
 
 [node name="RightmostSpawn" type="Position2D" parent="."]
 position = Vector2( 376, 8 )
+
+[node name="Settings" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/freeze_blocks = SubResource( 1 )
+anims/unfreeze_blocks = SubResource( 2 )

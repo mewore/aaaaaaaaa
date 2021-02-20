@@ -130,7 +130,14 @@ func move(delta: float) -> void:
     
     motion = move_and_slide(motion, Vector2.UP)
     if self.is_on_floor() and self.position.y < WIN_Y:
-        self.emit_signal("reached_win_area")
+        var is_touching_map := false
+        for _i in range(get_slide_count()):
+            var collision := get_slide_collision(_i as int)
+            if collision.collider is TileMap:
+                is_touching_map = true
+                break
+        if is_touching_map:
+            self.emit_signal("reached_win_area")
 
 func add_scream() -> float:
     if SCREAM_SCENE:

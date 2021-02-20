@@ -4,8 +4,6 @@ extends Node2D
 
 var LOG: Log = LogManager.get_log(self)
 
-const FALL_DOWN_SPEED: float = 50.0
-
 # The minimum distance (Manhattan - separately on the X and Y axes) from the player, which is required for this block to
 # turn into a map tile
 const REQUIRED_PLAYER_DISTANCE_RATIO: float = 0.5
@@ -17,6 +15,8 @@ var map_to_merge_into: TileMap
 
 var upper_block: FallingBlock setget set_upper_block
 var lower_block: FallingBlock setget set_lower_block
+
+var settings: FallingBlockSettings
 
 func set_upper_block(new_upper_block: FallingBlock) -> void:
     upper_block = new_upper_block
@@ -37,7 +37,7 @@ func _ready() -> void:
 
 func _physics_process(delta : float) -> void:
     if not map_to_merge_into:
-        self.position.y += FALL_DOWN_SPEED * delta
+        self.position.y += (settings.get_fall_speed() if settings else FallingBlockSettings.FALL_DOWN_SPEED) * delta
 
 func _process(_delta: float) -> void:
     if map_to_merge_into:

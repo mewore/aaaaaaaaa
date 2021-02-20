@@ -35,6 +35,7 @@ func _ready() -> void:
 
 func _on_InputScrambleTimer_timeout() -> void:
     InputManager.scramble_inputs(input_rng)
+    $GameWrapper/AnimationPlayer.play("inputs_changed")
 
 func _input(event: InputEvent) -> void:
     if MANUAL_PAUSING_ENABLED && event.is_action_pressed("ui_cancel"):
@@ -77,11 +78,7 @@ func _on_Player_won() -> void:
     self.paused = true
 
 func _on_Player_reached_win_area() -> void:
-    ($GameWrapper/FallingBlockContainer as FallingBlockContainer).topmost_row = null
     INPUT_SCRAMBLE_TIMER.paused = true
-    for _falling_block in get_tree().get_nodes_in_group("falling_block"):
-        var falling_block := _falling_block as FallingBlock
-        falling_block.megumin()
 
 func _on_Player_dead() -> void:
     LEVEL_OVER_OPTION_CONTAINER.title = "Oof! You died..."

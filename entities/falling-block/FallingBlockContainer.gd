@@ -20,6 +20,9 @@ onready var MIN_SPAWN_X := ($LeftmostSpawn as Position2D).position.x
 onready var MAX_SPAWN_X := ($RightmostSpawn as Position2D).position.x
 onready var BLOCKS_PER_ROW := int((MAX_SPAWN_X - MIN_SPAWN_X) / CELL_SIZE.x) + 1
 
+onready var ANIMATION_PLAYER := $AnimationPlayer
+onready var SETTINGS := $Settings as FallingBlockSettings
+
 var topmost_row: BlockRow
 
 func _ready() -> void:
@@ -31,7 +34,7 @@ func _process(delta: float) -> void:
     if not topmost_row:
         return
     var target_spawn_y := get_player_sight_line_y()
-    topmost_row.y += FallingBlock.FALL_DOWN_SPEED * delta
+    topmost_row.y += SETTINGS.get_fall_speed() * delta
     while topmost_row.y >= target_spawn_y:
         var new_row := create_row_at_y(topmost_row.y - CELL_SIZE.y)
         topmost_row.set_upper_row(new_row)
@@ -40,10 +43,22 @@ func _process(delta: float) -> void:
 
 func create_row_at_y(y: float) -> BlockRow:
     return BlockRow.new(Vector2(MIN_SPAWN_X, y), BLOCKS_PER_ROW, FALLING_BLOCK_SCENE, CELL_SIZE.x, BLOCK_DENSITY, RNG,
-        PLAYER)
+        PLAYER, SETTINGS)
 
 func get_player_sight_line_y() -> float:
     return PLAYER.position.y - WINDOW_HEIGHT - CELL_SIZE.y
+
+func _on_Player_reached_win_area() -> void:
+    self.topmost_row = null
+    for _falling_block in get_tree().get_nodes_in_group("falling_block"):
+        var falling_block := _falling_block as FallingBlock
+        falling_block.megumin()
+
+func freeze_blocks() -> void:
+    ANIMATION_PLAYER.play("freeze_blocks")
+
+func unfreeze_blocks() -> void:
+    ANIMATION_PLAYER.play("unfreeze_blocks")
 
 class BlockRow:
     
@@ -59,7 +74,8 @@ class BlockRow:
             block_width: float,
             block_density: float,
             rng: RandomNumberGenerator,
-            player: Node2D) -> void:
+            player: Node2D,
+            settings: FallingBlockSettings) -> void:
         
         self.y = pos.y
         var x: float = pos.x
@@ -68,6 +84,7 @@ class BlockRow:
                 var block := block_scene.instance() as FallingBlock
                 block.position = Vector2(x, pos.y)
                 block.player = player
+                block.settings = settings
                 blocks.append(block)
             else:
                 blocks.append(null)

@@ -50,6 +50,7 @@ func refresh_input_icons() -> void:
     MOVE_LEFT_INPUT_ICON.frame = INPUT_ICON_FRAME_OFFSET + InputManager.move_left_action_index
     MOVE_RIGHT_INPUT_ICON.frame = INPUT_ICON_FRAME_OFFSET + InputManager.move_right_action_index
     JUMP_INPUT_ICON.frame = INPUT_ICON_FRAME_OFFSET + InputManager.jump_action_index
+    $AnimationPlayer.play("inputs_changed")
 
 func _on_World_active_timer_changed(new_active_timer: Timer) -> void:
     self.active_timer = new_active_timer
