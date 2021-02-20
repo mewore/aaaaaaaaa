@@ -70,11 +70,11 @@ A< >B
   player win animation, and an overlay message asking the player to press space to restart).
 - [x] 💙 Player HP, which goes down at a constant speed. When the HP reaches 0, the game is lost. Player HP preview on
   the right side of the screen.
-- [ ] 💙 Screaming mechanic. Pressing `A` makes 'A' characters appear above the player. The first 9 As are lowercase and
+- [x] 💙 Screaming mechanic. Pressing `A` makes 'A' characters appear above the player. The first 9 As are lowercase and
   don't heal much. Afterwards, they're capital letters, and each subsequent one heals more than the previous one.
 - [ ] 💙 The player can be hit by the falling blocks (their underside, to be specific). When hit, the falling block is
   destroyed, and the player's HP starts going down faster.
-- [ ] 💙 Player HP preview on the right side of the screen
+- [x] 💙 Player HP preview on the right side of the screen
 - [ ] 💟 Publish
 
 ### Basic features

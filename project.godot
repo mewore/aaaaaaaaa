@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node2D",
+"class": "A",
+"language": "GDScript",
+"path": "res://entities/player/a/A.gd"
+}, {
+"base": "Node2D",
 "class": "FallingBlock",
 "language": "GDScript",
 "path": "res://entities/falling-block/FallingBlock.gd"
@@ -65,6 +70,7 @@ _global_script_classes=[ {
 "path": "res://scenes/WorldInfo.gd"
 } ]
 _global_script_class_icons={
+"A": "",
 "FallingBlock": "",
 "FallingBlockContainer": "",
 "HpBar": "",
@@ -226,4 +232,5 @@ quality/driver/driver_name="GLES2"
 quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0.556863, 0.627451, 0.568627, 1 )
 environment/default_environment="res://default_env.tres"

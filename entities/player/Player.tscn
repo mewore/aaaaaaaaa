@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
+[ext_resource path="res://entities/player/a/A.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://entities/player/states/Moving.gd" type="Script" id=3]
 [ext_resource path="res://entities/StateMachine.gd" type="Script" id=4]
@@ -135,6 +136,7 @@ tracks/2/keys = {
 collision_layer = 0
 collision_mask = 3
 script = ExtResource( 2 )
+SCREAM_SCENE = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -144,6 +146,10 @@ script = ExtResource( 4 )
 
 [node name="Moving" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
+
+[node name="ScreamClear" type="Timer" parent="StateMachine/Moving"]
+wait_time = 0.5
+one_shot = true
 
 [node name="Dying" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
@@ -182,11 +188,10 @@ smoothing_enabled = true
 smoothing_speed = 3.0
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -2 )
+position = Vector2( -2.07583, -3.08058 )
 texture = ExtResource( 6 )
 vframes = 8
 hframes = 8
-frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 autoplay = "idle"
@@ -197,6 +202,10 @@ anims/winning = SubResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/winning = SubResource( 7 )
+
+[node name="ScreamingContainer" type="Node2D" parent="."]
+position = Vector2( 0, -16 )
 [connection signal="reached_win_area" from="." to="StateMachine/Moving" method="_on_Player_reached_win_area"]
+[connection signal="timeout" from="StateMachine/Moving/ScreamClear" to="StateMachine/Moving" method="_on_ScreamClear_timeout"]
 [connection signal="timeout" from="StateMachine/Dying/Duration" to="StateMachine/Dying" method="_on_Duration_timeout"]
 [connection signal="timeout" from="StateMachine/Winning/Duration" to="StateMachine/Winning" method="_on_Duration_timeout"]

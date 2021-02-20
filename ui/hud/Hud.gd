@@ -19,8 +19,8 @@ onready var PLAYER := get_node_or_null(PLAYER_NODE) as Player
 
 func _ready() -> void:
     refresh_input_icons()
-    LOG.check_error_code(InputManager.connect("inputs_scrambled", self, "_on_inputs_scrambled"),
-        "Connecting the InputManager 'inputs_scrambled' signal")
+    LOG.check_error_code(InputManager.connect("inputs_changed", self, "_on_inputs_changed"),
+        "Connecting the InputManager 'inputs_changed' signal")
 
 func _process(_delta: float) -> void:
     if active_timer:
@@ -32,7 +32,7 @@ func _process(_delta: float) -> void:
     if PLAYER:
         HP_BAR.set_hp_ratio(PLAYER.hp / Player.MAX_HP)
 
-func _on_inputs_scrambled() -> void:
+func _on_inputs_changed() -> void:
     self.refresh_input_icons()
 
 func refresh_input_icons() -> void:

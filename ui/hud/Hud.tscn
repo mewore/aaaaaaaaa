@@ -16,6 +16,7 @@ __meta__ = {
 }
 
 [node name="ControlsLabel" type="Label" parent="."]
+self_modulate = Color( 0.788235, 0.8, 0.631373, 1 )
 margin_right = 112.0
 margin_bottom = 28.0
 text = "Controls"
@@ -85,6 +86,7 @@ hframes = 8
 frame = 10
 
 [node name="ControlScrambleTimer" type="Label" parent="."]
+self_modulate = Color( 0.788235, 0.8, 0.631373, 1 )
 margin_top = 100.0
 margin_right = 112.0
 margin_bottom = 128.0
@@ -98,6 +100,7 @@ margin_bottom = 142.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HpLabel" type="Label" parent="."]
+self_modulate = Color( 0.788235, 0.8, 0.631373, 1 )
 margin_top = 146.0
 margin_right = 112.0
 margin_bottom = 174.0

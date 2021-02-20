@@ -7,7 +7,7 @@
 [ext_resource path="res://scenes/World.gd" type="Script" id=5]
 [ext_resource path="res://ui/pause/background.png" type="Texture" id=6]
 [ext_resource path="res://entities/player/Player.tscn" type="PackedScene" id=7]
-[ext_resource path="res://environment/background.png" type="Texture" id=8]
+[ext_resource path="res://ui/MenuNavigationTip.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/hud/Hud.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/falling-block/FallingBlockContainer.tscn" type="PackedScene" id=10]
 
@@ -19,21 +19,10 @@ script = ExtResource( 5 )
 [node name="GameWrapper" type="Node2D" parent="."]
 pause_mode = 1
 
-[node name="Background" type="Sprite" parent="GameWrapper"]
-position = Vector2( -32, -384 )
-scale = Vector2( 1, 1.192 )
-texture = ExtResource( 8 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 576, 1000 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="Line2D" type="Line2D" parent="GameWrapper"]
 points = PoolVector2Array( -32, 0, 544, 0 )
 width = 3.0
-default_color = Color( 0.4, 1, 0.607843, 1 )
+default_color = Color( 0.317647, 0.321569, 0.384314, 1 )
 
 [node name="WorldInfo" type="Node" parent="GameWrapper" groups=[
 "world_info",
@@ -70,7 +59,7 @@ __meta__ = {
 }
 
 [node name="Overlay" type="Polygon2D" parent="LevelOverMenuLayer/WorldPauseMenu"]
-color = Color( 1, 0.996078, 0.996078, 0.784314 )
+color = Color( 0.67451, 0.654902, 0.654902, 0.784314 )
 polygon = PoolVector2Array( 0, 0, 512, 0, 512, 300, 0, 300 )
 
 [node name="Background" type="TextureRect" parent="LevelOverMenuLayer/WorldPauseMenu"]
@@ -91,6 +80,8 @@ title = "Game paused     "
 visible_option_count = 4
 WRAP_TYPE = 1
 options = PoolStringArray( "Restart", "Main menu" )
+
+[node name="MenuNavigationTip" parent="LevelOverMenuLayer/WorldPauseMenu" instance=ExtResource( 8 )]
 [connection signal="active_timer_changed" from="." to="HudLayer/Hud" method="_on_World_active_timer_changed"]
 [connection signal="timeout" from="GameWrapper/InputScrambleTimer" to="." method="_on_InputScrambleTimer_timeout"]
 [connection signal="dead" from="GameWrapper/Player" to="." method="_on_Player_dead"]

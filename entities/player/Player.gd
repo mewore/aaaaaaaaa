@@ -30,6 +30,14 @@ var is_jumping: bool = false
 
 var motion: Vector2 = Vector2.ZERO
 
+# a.
+export(int) var LOWERCASE_CAPITAL_SCREAMS := 9
+export(float) var SCREAM_WIDTH := 14.0
+export(PackedScene) var SCREAM_SCENE: PackedScene
+onready var SCREAMING_CONTAINER := $ScreamingContainer as Node2D
+export(float) var LOWERCASE_SCREAM_HEAL: float = 0.01
+export(float) var UPPERCASE_SCREAM_HEAL: float = 0.05
+
 onready var SPRITE: Sprite = $Sprite
 onready var ANIMATION_PLAYER: AnimationPlayer = $Sprite/AnimationPlayer
 onready var CAMERA: Camera2D = $Camera2D
@@ -56,12 +64,15 @@ func get_invulnerable() -> bool:
 
 func take_damage(_damage: int = -1) -> void:
     emit_signal("hit")
+    self.clear_scream()
 
 func megumin() -> void:
     ANIMATION_PLAYER.play("dying")
+    self.clear_scream()
 
 func celebrate() -> void:
     ROOT_ANIMATION_PLAYER.play("winning")
+    self.clear_scream()
 
 func win() -> void:
     emit_signal("won")
@@ -77,6 +88,7 @@ func move(delta: float) -> void:
     
     ANIMATION_PLAYER.play("walking" if has_x_axis else "idle")
     if has_x_axis:
+        self.clear_scream()
         SPRITE.flip_h = x_axis < 0
     
     CAMERA.position.x = CAMERA_X_OFFSET * x_axis * abs(self.motion.x) / MAX_HORIZONTAL_SPEED
@@ -103,9 +115,25 @@ func move(delta: float) -> void:
     if self.is_on_floor() and self.position.y < WIN_Y:
         self.emit_signal("reached_win_area")
 
+func add_scream() -> float:
+    if SCREAM_SCENE:
+        var scream_count := SCREAMING_CONTAINER.get_child_count()
+        SCREAMING_CONTAINER.position.x = -scream_count * SCREAM_WIDTH * 0.5
+        var scream := SCREAM_SCENE.instance() as A
+        scream.position.x = scream_count * SCREAM_WIDTH
+        scream.uppercase = scream_count >= LOWERCASE_CAPITAL_SCREAMS
+        SCREAMING_CONTAINER.add_child(scream)
+        return UPPERCASE_SCREAM_HEAL if scream.uppercase else LOWERCASE_SCREAM_HEAL
+    return 0.0
+
+func clear_scream() -> void:
+    for _scream in SCREAMING_CONTAINER.get_children():
+        SCREAMING_CONTAINER.remove_child(_scream)
+
 func handle_jump_control(input_event: InputEvent) -> void:
     if input_event.is_action_pressed(InputManager.jump_action):
         self.last_wanted_to_jump = OS.get_ticks_msec()
+        self.clear_scream()
     elif input_event.is_action_released(InputManager.jump_action):
         stop_jumping()
 

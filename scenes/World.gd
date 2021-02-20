@@ -25,8 +25,13 @@ func set_active_timer(new_active_timer: Timer) -> void:
 
 func _ready() -> void:
     input_rng.seed = self.name.hash()
+    InputManager.unscramble_inputs()
     InputManager.scramble_inputs(input_rng)
     self.active_timer = INPUT_SCRAMBLE_TIMER
+    var pause_overlay_polygon := $LevelOverMenuLayer/WorldPauseMenu/Overlay as Polygon2D
+    var alpha: float = pause_overlay_polygon.color.a # a
+    pause_overlay_polygon.color = ProjectSettings.get("rendering/environment/default_clear_color")
+    pause_overlay_polygon.color.a = alpha
 
 func _on_InputScrambleTimer_timeout() -> void:
     InputManager.scramble_inputs(input_rng)

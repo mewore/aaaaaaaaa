@@ -1,6 +1,6 @@
 extends Node
 
-signal inputs_scrambled()
+signal inputs_changed()
 
 var LOG: Log = LogManager.get_log(self)
 
@@ -8,7 +8,8 @@ const ACTION_COUNT = 5
 
 var action_symbols = ["X", "[ ]", "P", "8", "B"]
 var actions = ["action1", "action2", "action3", "action4", "action5"]
-var input_mapping: PoolIntArray = PoolIntArray([0, 1, 2, 3, 4])
+const INITIAL_INPUT_MAPPING := PoolIntArray([0, 1, 2, 3, 4])
+var input_mapping := INITIAL_INPUT_MAPPING
 
 var move_left_action_index := 0 setget set_move_left_action_index
 var move_right_action_index := 1 setget set_move_right_action_index
@@ -29,6 +30,10 @@ func set_move_right_action_index(new_move_right_action_index: int) -> void:
 func set_jump_action_index(new_jump_action_index: int) -> void:
     jump_action_index = new_jump_action_index
     jump_action = actions[jump_action_index]
+    
+func unscramble_inputs() -> void:
+    self.input_mapping = INITIAL_INPUT_MAPPING
+    self.refresh_indices()
 
 func scramble_inputs(rng: RandomNumberGenerator) -> void:
     for i in range(1, ACTION_COUNT):
@@ -37,10 +42,12 @@ func scramble_inputs(rng: RandomNumberGenerator) -> void:
             var tmp := input_mapping[i]
             input_mapping[i] = input_mapping[index]
             input_mapping[index] = tmp
-    
+    self.refresh_indices()
+
+func refresh_indices() -> void:
     self.move_left_action_index = input_mapping[0]
     self.move_right_action_index = input_mapping[1]
     self.jump_action_index = input_mapping[2]
-    LOG.info("Inputs scrambled. New inputs: %s, %s, %s" % [action_symbols[input_mapping[0]],
+    LOG.info("Inputs changed. New inputs: %s, %s, %s" % [action_symbols[input_mapping[0]],
         action_symbols[input_mapping[1]], action_symbols[input_mapping[2]]])
-    emit_signal("inputs_scrambled")
+    emit_signal("inputs_changed")
