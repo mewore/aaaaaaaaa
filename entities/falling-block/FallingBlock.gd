@@ -69,3 +69,9 @@ func _on_upper_block_gone() -> void:
 
 func _on_lower_block_gone() -> void:
     self.lower_block = null
+
+func _on_AttackBox_area_entered(area: Area2D) -> void:
+    var entity := area.owner
+    if entity.has_method("take_damage"):
+        entity.take_damage()
+    queue_free()

@@ -50,7 +50,7 @@ func set_invulnerable(new_invulnerable: bool) -> void:
 func get_invulnerable() -> bool:
     return not HURTBOX.monitorable if HURTBOX else true
 
-func take_damage(_source_damage, _damage: int = -1) -> void:
+func take_damage(_damage: int = -1) -> void:
     emit_signal("hit")
 
 func megumin() -> void:

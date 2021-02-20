@@ -12,7 +12,7 @@
 extents = Vector2( 4, 6 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 2.0
+radius = 4.0
 
 [sub_resource type="Animation" id=3]
 resource_name = "dying"
@@ -132,7 +132,7 @@ tracks/2/keys = {
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
-collision_layer = 4
+collision_layer = 0
 collision_mask = 3
 script = ExtResource( 2 )
 
@@ -162,10 +162,11 @@ one_shot = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
 monitoring = false
-collision_layer = 2147483650
+collision_layer = 2147483652
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2( 0, -1 )
 shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
