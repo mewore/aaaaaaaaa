@@ -1,5 +1,7 @@
 extends Node2D
 
+signal active_timer_changed(new_active_timer)
+
 var LOG: Log = LogManager.get_log(self)
 
 const NEW_SAVE_OPTION = "(New save)"
@@ -20,9 +22,17 @@ const MANUAL_PAUSING_ENABLED = false
 
 var input_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+onready var INPUT_SCRAMBLE_TIMER: Timer = $GameWrapper/InputScrambleTimer
+var active_timer: Timer setget set_active_timer
+
+func set_active_timer(new_active_timer: Timer) -> void:
+    active_timer = new_active_timer
+    emit_signal("active_timer_changed", active_timer)
+
 func _ready() -> void:
     input_rng.seed = "input_rng".hash()
     InputManager.scramble_inputs(input_rng)
+    self.active_timer = INPUT_SCRAMBLE_TIMER
 
 func _on_InputScrambleTimer_timeout() -> void:
     InputManager.scramble_inputs(input_rng)

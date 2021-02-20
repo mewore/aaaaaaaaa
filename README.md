@@ -40,7 +40,7 @@ aaAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHH
 - [x] 💙 A platformer player in a barren environment (line collision at the bottom Y and left/right X). The player can
   move and jump around.
 - [x] 💙 The controls are scrambled every 60 seconds.
-- [ ] 💙 Control preview on the right side of the screen, like this (<, > and j are the icons for the 'move_left',
+- [x] 💙 Control preview on the right side of the screen, like this (<, > and j are the icons for the 'move_left',
   'move_right' and 'jump' actions, and A, B and C are the icons of the input keys):
 
 ```
