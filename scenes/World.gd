@@ -18,6 +18,15 @@ var pause_screen: int = PauseScreen.MAIN setget set_pause_screen
 
 const MANUAL_PAUSING_ENABLED = false
 
+var input_rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
+func _ready() -> void:
+    input_rng.seed = "input_rng".hash()
+    InputManager.scramble_inputs(input_rng)
+
+func _on_InputScrambleTimer_timeout() -> void:
+    InputManager.scramble_inputs(input_rng)
+
 func _input(event: InputEvent) -> void:
     if MANUAL_PAUSING_ENABLED && event.is_action_pressed("ui_cancel"):
         if self.paused and self.pause_screen != PauseScreen.MAIN:

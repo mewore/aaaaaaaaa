@@ -39,7 +39,7 @@ aaAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHH
 - [x] 💙 Main menu (for now only a 'New game' and 'Exit' buttons)
 - [x] 💙 A platformer player in a barren environment (line collision at the bottom Y and left/right X). The player can
   move and jump around.
-- [ ] 💙 The controls are scrambled every 60 seconds.
+- [x] 💙 The controls are scrambled every 60 seconds.
 - [ ] 💙 Control preview on the right side of the screen, like this (<, > and j are the icons for the 'move_left',
   'move_right' and 'jump' actions, and A, B and C are the icons of the input keys):
 
