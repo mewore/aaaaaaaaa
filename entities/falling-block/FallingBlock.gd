@@ -74,4 +74,7 @@ func _on_AttackBox_area_entered(area: Area2D) -> void:
     var entity := area.owner
     if entity.has_method("take_damage"):
         entity.take_damage()
+    self.megumin()
+
+func megumin() -> void:
     queue_free()

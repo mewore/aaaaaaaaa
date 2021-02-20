@@ -13,6 +13,7 @@
 
 [node name="World" type="Node2D"]
 pause_mode = 2
+position = Vector2( 1, 0 )
 script = ExtResource( 5 )
 
 [node name="GameWrapper" type="Node2D" parent="."]
@@ -51,51 +52,46 @@ autostart = true
 [node name="Player" parent="GameWrapper" instance=ExtResource( 7 )]
 position = Vector2( 176, 200 )
 
-[node name="PauseMenuLayer" type="CanvasLayer" parent="."]
+[node name="HudLayer" type="CanvasLayer" parent="."]
+pause_mode = 1
 
-[node name="WorldPauseMenu" type="CenterContainer" parent="PauseMenuLayer"]
+[node name="Hud" parent="HudLayer" instance=ExtResource( 9 )]
+
+[node name="LevelOverMenuLayer" type="CanvasLayer" parent="."]
+
+[node name="WorldPauseMenu" type="CenterContainer" parent="LevelOverMenuLayer"]
 visible = false
-margin_right = 256.0
-margin_bottom = 150.0
+margin_right = 512.0
+margin_bottom = 300.0
 theme = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="TextureRect" parent="PauseMenuLayer/WorldPauseMenu"]
-margin_left = 38.0
-margin_top = 26.0
-margin_right = 218.0
-margin_bottom = 126.0
+[node name="Overlay" type="Polygon2D" parent="LevelOverMenuLayer/WorldPauseMenu"]
+color = Color( 1, 0.996078, 0.996078, 0.784314 )
+polygon = PoolVector2Array( 0, 0, 512, 0, 512, 300, 0, 300 )
+
+[node name="Background" type="TextureRect" parent="LevelOverMenuLayer/WorldPauseMenu"]
+visible = false
+margin_left = 166.0
+margin_top = 100.0
+margin_right = 346.0
+margin_bottom = 200.0
 size_flags_horizontal = 3
 texture = ExtResource( 6 )
 
-[node name="PauseOptionContainer" parent="PauseMenuLayer/WorldPauseMenu" instance=ExtResource( 4 )]
-margin_left = 19.0
-margin_top = 0.0
-margin_right = 236.0
-margin_bottom = 153.0
+[node name="PauseOptionContainer" parent="LevelOverMenuLayer/WorldPauseMenu" instance=ExtResource( 4 )]
+margin_left = 147.0
+margin_top = 73.0
+margin_right = 364.0
+margin_bottom = 226.0
 title = "Game paused     "
 visible_option_count = 4
 WRAP_TYPE = 1
-options = PoolStringArray( "Continue", "Save", "Main menu" )
-
-[node name="SaveOptionContainer" parent="PauseMenuLayer/WorldPauseMenu" instance=ExtResource( 4 )]
-visible = false
-margin_left = -38.0
-margin_top = 0.0
-margin_right = 294.0
-margin_bottom = 153.0
-title = "Save game                  "
-visible_option_count = 4
-WRAP_TYPE = 1
-options = PoolStringArray( "Continue", "Main menu" )
-
-[node name="HudLayer" type="CanvasLayer" parent="."]
-pause_mode = 1
-
-[node name="Hud" parent="HudLayer" instance=ExtResource( 9 )]
+options = PoolStringArray( "Restart", "Main menu" )
 [connection signal="active_timer_changed" from="." to="HudLayer/Hud" method="_on_World_active_timer_changed"]
 [connection signal="timeout" from="GameWrapper/InputScrambleTimer" to="." method="_on_InputScrambleTimer_timeout"]
-[connection signal="option_selected" from="PauseMenuLayer/WorldPauseMenu/PauseOptionContainer" to="." method="_on_PauseOptionContainer_option_selected"]
-[connection signal="option_selected" from="PauseMenuLayer/WorldPauseMenu/SaveOptionContainer" to="." method="_on_SaveOptionContainer_option_selected"]
+[connection signal="reached_win_area" from="GameWrapper/Player" to="." method="_on_Player_reached_win_area"]
+[connection signal="won" from="GameWrapper/Player" to="." method="_on_Player_won"]
+[connection signal="option_selected" from="LevelOverMenuLayer/WorldPauseMenu/PauseOptionContainer" to="." method="_on_PauseOptionContainer_option_selected"]

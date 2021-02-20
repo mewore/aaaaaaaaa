@@ -1,3 +1,5 @@
+class_name FallingBlockContainer
+
 extends Node2D
 
 export(float, 0.0, 1.0) var BLOCK_DENSITY: float = 0.05
@@ -26,6 +28,8 @@ func _ready() -> void:
     topmost_row.add_all_blocks(self)
 
 func _process(delta: float) -> void:
+    if not topmost_row:
+        return
     var target_spawn_y := get_player_sight_line_y()
     topmost_row.y += FallingBlock.FALL_DOWN_SPEED * delta
     while topmost_row.y >= target_spawn_y:

@@ -6,6 +6,8 @@ const SAVE_DIRECTORY = "user://"
 const SAVE_FILE_PREFIX = "save-"
 const SAVE_FILE_SUFFIX = ".json"
 
+const DEFAULT_SAVE_FILE := "default";
+
 var game_data: Dictionary = {}
 
 func get_world_info() -> WorldInfo:

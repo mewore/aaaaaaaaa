@@ -96,8 +96,7 @@ func move(delta: float) -> void:
         last_jumped = OS.get_ticks_msec()
     
     motion = move_and_slide(motion, Vector2.UP)
-    if self.position.y < WIN_Y:
-        print("Player won")
+    if self.is_on_floor() and self.position.y < WIN_Y:
         self.emit_signal("reached_win_area")
 
 func handle_jump_control(input_event: InputEvent) -> void:

@@ -15,7 +15,9 @@ b = Vector2( 8, -8 )
 a = Vector2( -6, -8 )
 b = Vector2( 6, -8 )
 
-[node name="FallingBlock" type="Node2D"]
+[node name="FallingBlock" type="Node2D" groups=[
+"falling_block",
+]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
