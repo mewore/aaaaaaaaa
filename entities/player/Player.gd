@@ -16,7 +16,7 @@ export(float) var DECELERATION: float = 1000.0
 export(float) var MAX_HORIZONTAL_SPEED: float = 100.0
 
 # Vertical
-export(float) var JUMP_SPEED: float = 180.0
+export(float) var JUMP_SPEED: float = 250.0
 export(float, 0.0, 0.5) var JUMP_STOP_SPEED_RETENTION: float = 0.5
 export(float) var GRAVITY: float = 400.0
 export(float) var MAX_FALL_SPEED: float = 270.0

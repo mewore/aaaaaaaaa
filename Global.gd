@@ -16,16 +16,18 @@ func new_game() -> void:
 
 func save_game(save_name: String, save_to_overwrite: String = "") -> void:
     for _node in get_tree().get_nodes_in_group("saveable"):
-        var node: Node = _node
+        var node := _node as Node
         if node.has_method("save_data"):
             node.save_data()
 
-    for key in game_data.keys():
+    for _key in game_data.keys():
+        var key := _key as String
         var value = game_data.get(key)
         if value is Dictionary:
-            var dict: Dictionary = value
+            var dict := value as Dictionary
             if dict.empty():
-                game_data.erase(key)
+                if not game_data.erase(key):
+                    print("Tried to erase a non-existent game data key '%s'!" % key)
 
     var new_save_file_name: String = SAVE_DIRECTORY + "/" + SAVE_FILE_PREFIX + save_name + SAVE_FILE_SUFFIX
     
@@ -57,6 +59,9 @@ func get_save_files() -> PoolStringArray:
 
     result.sort()
     return PoolStringArray(result)
+
+func get_single_node_in_group(group: String) -> Node:
+    return get_tree().get_nodes_in_group(group).front()
 
 func open_save_directory() -> Directory:
     var dir: Directory = Directory.new()

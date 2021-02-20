@@ -1,15 +1,15 @@
 extends VBoxContainer
 
-var LOG: Log = LogManager.get_log(self)
+var LOG := LogManager.get_log(self)
 
-onready var OPTION_CONTAINER: OptionContanier = $OptionWrapper/OptionContainer
+onready var OPTION_CONTAINER := $OptionWrapper/OptionContainer as OptionContanier
 
-var GAME_TITLE = ProjectSettings.get("application/config/name")
+var GAME_TITLE := ProjectSettings.get("application/config/name") as String
 
-const NEW_GAME_OPTION = "Start new game"
-const EXIT_OPTION = "Exit"
+const NEW_GAME_OPTION := "Start new game"
+const EXIT_OPTION := "Exit"
 
-const NO_SAVED_GAMES_PSEUDO_OPTION = "No saved games"
+const NO_SAVED_GAMES_PSEUDO_OPTION := "No saved games"
 
 var MAIN_OPTION_SET := OptionSet.new("Main menu")
 var active_options: OptionSet setget set_active_options

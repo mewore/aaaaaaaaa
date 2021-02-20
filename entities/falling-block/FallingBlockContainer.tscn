@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://entities/falling-block/FallingBlockContainer.gd" type="Script" id=1]
+[ext_resource path="res://entities/falling-block/FallingBlock.tscn" type="PackedScene" id=2]
+
+[node name="FallingBlockContainer" type="Node2D"]
+script = ExtResource( 1 )
+PLAYER_NODE = NodePath("../Player")
+MAP_NODE = NodePath("../TileMap")
+FALLING_BLOCK_SCENE = ExtResource( 2 )
+
+[node name="LeftmostSpawn" type="Position2D" parent="."]
+position = Vector2( 24, 8 )
+
+[node name="RightmostSpawn" type="Position2D" parent="."]
+position = Vector2( 392, 8 )

@@ -1,6 +1,6 @@
 extends PlayerState
 
-onready var DURATION_TIMER: Timer = $Duration
+onready var DURATION_TIMER := $Duration as Timer
 
 func enter() -> void:
     self.player.invulnerable = true

@@ -49,7 +49,7 @@ aaAaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHH
 A< >B
 ```
 
-- [ ] 💙 Falling blocks. They don't do anything to the player for now and just fall into place (in a grid-like
+- [x] 💙 Falling blocks. They don't do anything to the player for now and just fall into place (in a grid-like
   structure). They fall at a constant speed as opposed to a linearly increasing one. When they fall into place, the
   blocks themselves are removed and replaced with a TileMap tile.
     - The blocks should have a one-way collision until they fall down. When they're down, they should wait for the
@@ -58,12 +58,14 @@ A< >B
       cell, it is decided randomly whether the cell will have a corresponding falling block; maybe later it can be made
       with simplex noise or something). The tricky part is when the camera moves up and down, and it isn't clear how
       this will be implemented yet.
-    - At every update, `target_spawn_y = player.y - SCREEN_HEIGHT / 2 - CELL_HEIGHT`
+    - At every update, `target_spawn_y = player.y - WINDOW_HEIGHT - CELL_HEIGHT`
     - At the beginning, `next_spawn_y = target_spawn_y`
     - At every update, `next_spawn_y += BLOCK_FALL_SPEED * delta` and `block.position.y += BLOCK_FALL_SPEED * delta`
     - At every update, `while next_spawn_y >= target_spawn_y:` `spawn_row(next_spawn_y)`
       and `next_spawn_y -= CELL_HEIGHT`
-- [ ] 💙 The falling blocks should avoid the player.
+    - Also, keep the next (upper) layer that is to be created later so that it can be determined whether the new blocks
+      will have blocks above them so that their texture can be determined correctly.
+- [ ] 💙 The falling blocks should explode when their bottom collides with the player.
 - [ ] 💙 When the player reaches Y=0 (which is shown with a Line2D for now), the game is won (no win screen; only a
   player win animation, and an overlay message asking the player to press space to restart).
 - [ ] 💙 Player HP, which goes down at a constant speed. When the HP reaches 0, the game is lost. Player HP preview on
@@ -77,6 +79,9 @@ A< >B
 
 ### Basic features
 
+- [ ] 💙 (Performance) Use a one-second timer to update the right-side time label text instead of updatnig it at
+  every `_process` call
+- [ ] 💙 Make the non-pressed control previews slightly transparent so that the controls feel more responsive
 - [ ] 💛 Menu sounds
 - [ ] 💙 Sound configuration for the menu
 - [ ] 💛 Player hit sound
@@ -94,9 +99,10 @@ A< >B
 - [ ] 💙 Keep track of the total time.
 - [ ] 💙 Player shooting
 - [ ] 💛 Shooting sound
-- [ ] 💙 Block destruction
+- [ ] 💙 💜 Block destruction (appearing as progressive cracks no the blocks rather than health bars)
 - [ ] 💛 Block hit sound
 - [ ] 💙 End-level upgrades
+- [ ] 💙 The player bullets can damage tiles as well
 
 ### Advanced features
 

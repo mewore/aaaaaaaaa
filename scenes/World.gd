@@ -30,7 +30,7 @@ func set_active_timer(new_active_timer: Timer) -> void:
     emit_signal("active_timer_changed", active_timer)
 
 func _ready() -> void:
-    input_rng.seed = "input_rng".hash()
+    input_rng.seed = self.name.hash()
     InputManager.scramble_inputs(input_rng)
     self.active_timer = INPUT_SCRAMBLE_TIMER
 

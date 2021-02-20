@@ -132,7 +132,8 @@ tracks/2/keys = {
 [node name="Player" type="KinematicBody2D" groups=[
 "player",
 ]]
-collision_layer = 0
+collision_layer = 4
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -173,7 +174,7 @@ current = true
 limit_left = 0
 limit_top = -256
 limit_right = 512
-limit_bottom = 512
+limit_bottom = 240
 limit_smoothed = true
 drag_margin_h_enabled = true
 smoothing_enabled = true
