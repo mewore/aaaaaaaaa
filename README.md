@@ -68,7 +68,7 @@ A< >B
 - [x] 💙 The falling blocks should explode when their bottom collides with the player.
 - [x] 💙 When the player reaches Y=0 (which is shown with a Line2D for now), the game is won (no win screen; only a
   player win animation, and an overlay message asking the player to press space to restart).
-- [ ] 💙 Player HP, which goes down at a constant speed. When the HP reaches 0, the game is lost. Player HP preview on
+- [x] 💙 Player HP, which goes down at a constant speed. When the HP reaches 0, the game is lost. Player HP preview on
   the right side of the screen.
 - [ ] 💙 Screaming mechanic. Pressing `A` makes 'A' characters appear above the player. The first 9 As are lowercase and
   don't heal much. Afterwards, they're capital letters, and each subsequent one heals more than the previous one.

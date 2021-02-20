@@ -68,8 +68,8 @@ func _on_PauseOptionContainer_option_selected(_option_index: int, option: String
             assert(false, "Don't know how to handle option: '%s'" % option)
 
 func _on_Player_won() -> void:
-    self.paused = true
     LEVEL_OVER_OPTION_CONTAINER.title = "You win!"
+    self.paused = true
 
 func _on_Player_reached_win_area() -> void:
     ($GameWrapper/FallingBlockContainer as FallingBlockContainer).topmost_row = null
@@ -77,3 +77,7 @@ func _on_Player_reached_win_area() -> void:
     for _falling_block in get_tree().get_nodes_in_group("falling_block"):
         var falling_block := _falling_block as FallingBlock
         falling_block.megumin()
+
+func _on_Player_dead() -> void:
+    LEVEL_OVER_OPTION_CONTAINER.title = "Oof! You died..."
+    self.paused = true

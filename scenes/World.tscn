@@ -56,6 +56,7 @@ position = Vector2( 176, 200 )
 pause_mode = 1
 
 [node name="Hud" parent="HudLayer" instance=ExtResource( 9 )]
+PLAYER_NODE = NodePath("../../GameWrapper/Player")
 
 [node name="LevelOverMenuLayer" type="CanvasLayer" parent="."]
 
@@ -92,6 +93,7 @@ WRAP_TYPE = 1
 options = PoolStringArray( "Restart", "Main menu" )
 [connection signal="active_timer_changed" from="." to="HudLayer/Hud" method="_on_World_active_timer_changed"]
 [connection signal="timeout" from="GameWrapper/InputScrambleTimer" to="." method="_on_InputScrambleTimer_timeout"]
+[connection signal="dead" from="GameWrapper/Player" to="." method="_on_Player_dead"]
 [connection signal="reached_win_area" from="GameWrapper/Player" to="." method="_on_Player_reached_win_area"]
 [connection signal="won" from="GameWrapper/Player" to="." method="_on_Player_won"]
 [connection signal="option_selected" from="LevelOverMenuLayer/WorldPauseMenu/PauseOptionContainer" to="." method="_on_PauseOptionContainer_option_selected"]

@@ -2,6 +2,7 @@ class_name Player
 
 extends KinematicBody2D
 
+signal dead()
 signal hit()
 signal reached_win_area()
 signal won()
@@ -42,6 +43,9 @@ onready var HURTBOX: Area2D = $Hurtbox
 var invulnerable: bool setget set_invulnerable, get_invulnerable
 
 onready var ROOT_ANIMATION_PLAYER: AnimationPlayer = $AnimationPlayer
+
+const MAX_HP := 1.0
+var hp := 1.0
 
 func set_invulnerable(new_invulnerable: bool) -> void:
     if HURTBOX:
