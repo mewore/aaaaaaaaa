@@ -12,6 +12,9 @@ onready var TIME_LABEL := $ControlScrambleTimer as Label
 
 onready var HP_BAR := $HpBarWrapper/HpBarControl/HpBar as HpBar
 
+onready var DAMAGE_TAKEN_LABEL := $DamageTaken as Label
+export(int) var DAMAGE_TAKEN_SYMBOLS_PER_LINE := 10
+
 var active_timer: Timer
 
 export(NodePath) var PLAYER_NODE: NodePath
@@ -42,3 +45,9 @@ func refresh_input_icons() -> void:
 
 func _on_World_active_timer_changed(new_active_timer: Timer) -> void:
     self.active_timer = new_active_timer
+
+
+func _on_Player_hit() -> void:
+    if DAMAGE_TAKEN_LABEL.text.count("x") % DAMAGE_TAKEN_SYMBOLS_PER_LINE == 0:
+        DAMAGE_TAKEN_LABEL.text += '\n';
+    DAMAGE_TAKEN_LABEL.text += 'x'

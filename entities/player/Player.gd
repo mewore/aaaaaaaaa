@@ -40,7 +40,7 @@ export(float) var UPPERCASE_SCREAM_HEAL: float = 0.05
 
 onready var SPRITE: Sprite = $Sprite
 onready var ANIMATION_PLAYER: AnimationPlayer = $Sprite/AnimationPlayer
-onready var CAMERA: Camera2D = $Camera2D
+onready var CAMERA := $Camera as AdvancedCamera2D
 onready var CAMERA_X_OFFSET: float = CAMERA.position.x
 onready var INITIAL_CAMERA_Y_OFFSET: float = CAMERA.position.y
 export(float) var CAMERA_LOOK_DOWN_DISTANCE: float = 50.0
@@ -55,6 +55,9 @@ onready var ROOT_ANIMATION_PLAYER: AnimationPlayer = $AnimationPlayer
 const MAX_HP := 1.0
 var hp := 1.0
 
+export(float) var HIT_DOWNWARD_SPEED := JUMP_SPEED
+var damage_taken := 0
+
 func set_invulnerable(new_invulnerable: bool) -> void:
     if HURTBOX:
         HURTBOX.set_deferred("monitorable", not new_invulnerable)
@@ -62,9 +65,12 @@ func set_invulnerable(new_invulnerable: bool) -> void:
 func get_invulnerable() -> bool:
     return not HURTBOX.monitorable if HURTBOX else true
 
-func take_damage(_damage: int = -1) -> void:
-    emit_signal("hit")
+func take_damage(damage: int = 1) -> void:
+    self.damage_taken += damage
+    self.motion.y = HIT_DOWNWARD_SPEED
     self.clear_scream()
+    CAMERA.shake()
+    emit_signal("hit")
 
 func megumin() -> void:
     ANIMATION_PLAYER.play("dying")

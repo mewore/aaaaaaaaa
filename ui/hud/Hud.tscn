@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ui/default-theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/hud/Hud.gd" type="Script" id=2]
 [ext_resource path="res://ui/hud/control-icons.png" type="Texture" id=3]
 [ext_resource path="res://entities/hp-bar/HpBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/small-font-theme.tres" type="Theme" id=5]
 
 [node name="Hud" type="VBoxContainer"]
 margin_left = 400.0
 margin_right = 512.0
 margin_bottom = 300.0
+rect_min_size = Vector2( 112, 0 )
+rect_clip_content = true
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -99,7 +102,7 @@ margin_right = 112.0
 margin_bottom = 142.0
 rect_min_size = Vector2( 0, 10 )
 
-[node name="HpLabel" type="Label" parent="."]
+[node name="HpTitle" type="Label" parent="."]
 self_modulate = Color( 0.788235, 0.8, 0.631373, 1 )
 margin_top = 146.0
 margin_right = 112.0
@@ -122,3 +125,27 @@ margin_bottom = 8.0
 [node name="HpBar" parent="HpBarWrapper/HpBarControl" instance=ExtResource( 4 )]
 scale = Vector2( 3, 3 )
 invisible_when_full = false
+
+[node name="Spacer2" type="Control" parent="."]
+margin_top = 198.0
+margin_right = 112.0
+margin_bottom = 208.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="DamageTakenTitle" type="Label" parent="."]
+self_modulate = Color( 0.788235, 0.8, 0.631373, 1 )
+margin_top = 212.0
+margin_right = 112.0
+margin_bottom = 271.0
+text = "Damage
+Taken"
+align = 1
+
+[node name="DamageTaken" type="Label" parent="."]
+self_modulate = Color( 0.545098, 0.25098, 0.286275, 1 )
+margin_top = 275.0
+margin_right = 112.0
+margin_bottom = 283.0
+theme = ExtResource( 5 )
+align = 1
+percent_visible = -0.05

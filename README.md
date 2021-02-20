@@ -72,7 +72,7 @@ A< >B
   the right side of the screen.
 - [x] 💙 Screaming mechanic. Pressing `A` makes 'A' characters appear above the player. The first 9 As are lowercase and
   don't heal much. Afterwards, they're capital letters, and each subsequent one heals more than the previous one.
-- [ ] 💙 The player can be hit by the falling blocks (their underside, to be specific). When hit, the falling block is
+- [x] 💙 The player can be hit by the falling blocks (their underside, to be specific). When hit, the falling block is
   destroyed, and the player's HP starts going down faster.
 - [x] 💙 Player HP preview on the right side of the screen
 - [ ] 💟 Publish

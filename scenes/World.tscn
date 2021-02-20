@@ -60,7 +60,7 @@ __meta__ = {
 
 [node name="Overlay" type="Polygon2D" parent="LevelOverMenuLayer/WorldPauseMenu"]
 color = Color( 0.67451, 0.654902, 0.654902, 0.784314 )
-polygon = PoolVector2Array( 0, 0, 512, 0, 512, 300, 0, 300 )
+polygon = PoolVector2Array( 0, 0, 512, 0, 512, 1200, 0, 1200 )
 
 [node name="Background" type="TextureRect" parent="LevelOverMenuLayer/WorldPauseMenu"]
 visible = false
@@ -85,6 +85,7 @@ options = PoolStringArray( "Restart", "Main menu" )
 [connection signal="active_timer_changed" from="." to="HudLayer/Hud" method="_on_World_active_timer_changed"]
 [connection signal="timeout" from="GameWrapper/InputScrambleTimer" to="." method="_on_InputScrambleTimer_timeout"]
 [connection signal="dead" from="GameWrapper/Player" to="." method="_on_Player_dead"]
+[connection signal="hit" from="GameWrapper/Player" to="HudLayer/Hud" method="_on_Player_hit"]
 [connection signal="reached_win_area" from="GameWrapper/Player" to="." method="_on_Player_reached_win_area"]
 [connection signal="won" from="GameWrapper/Player" to="." method="_on_Player_won"]
 [connection signal="option_selected" from="LevelOverMenuLayer/WorldPauseMenu/PauseOptionContainer" to="." method="_on_PauseOptionContainer_option_selected"]

@@ -2,10 +2,12 @@ extends PlayerState
 
 onready var SCREAM_CLEAR_TIMER := $ScreamClear
 
-const HP_LOST_PER_SECOND := 0.05
+const HP_LOST_PER_SECOND := 0.02
+const HP_LOST_PER_DAMAGE_PER_SECOND := 0.03
 
 func process(delta: float) -> void:
     self.player.hp -= delta * HP_LOST_PER_SECOND
+    self.player.hp -= delta * self.player.damage_taken * HP_LOST_PER_DAMAGE_PER_SECOND
     if self.player.hp < 0.0:
         self.player.hp = 0.0
         self.next_state = DYING

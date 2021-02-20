@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/player/a/A.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=2]
@@ -6,11 +6,15 @@
 [ext_resource path="res://entities/StateMachine.gd" type="Script" id=4]
 [ext_resource path="res://entities/player/states/Dying.gd" type="Script" id=5]
 [ext_resource path="res://entities/player/player.png" type="Texture" id=6]
+[ext_resource path="res://entities/advanced-camera2d/AdvancedCamera2D.tscn" type="PackedScene" id=7]
 [ext_resource path="res://entities/player/states/Dead.gd" type="Script" id=8]
 [ext_resource path="res://entities/player/states/Winning.gd" type="Script" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 6 )
+
+[sub_resource type="Curve" id=8]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.244898, 0.390909 ), 0.0, 0.0, 0, 0, Vector2( 0.412245, 0.8 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 4.0
@@ -166,6 +170,11 @@ script = ExtResource( 10 )
 wait_time = 3.0
 one_shot = true
 
+[node name="Camera" parent="." instance=ExtResource( 7 )]
+SHAKE_INTENSITY_CURVE = SubResource( 8 )
+SHAKE_AMPLITUDE = 5.0
+SHAKE_DURATION = 0.5
+
 [node name="Hurtbox" type="Area2D" parent="."]
 monitoring = false
 collision_layer = 2147483652
@@ -174,18 +183,6 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0, -1 )
 shape = SubResource( 2 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 56, -72 )
-current = true
-limit_left = 0
-limit_top = -256
-limit_right = 512
-limit_bottom = 240
-limit_smoothed = true
-drag_margin_h_enabled = true
-smoothing_enabled = true
-smoothing_speed = 3.0
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -2.07583, -3.08058 )
