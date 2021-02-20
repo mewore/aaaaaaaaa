@@ -77,10 +77,14 @@ A< >B
 - [x] 💙 Player HP preview on the right side of the screen
 - [x] 💙 Let the player hold down the A key instead of spam-pressing it. Stressing the player out may be on the menu,
   but injuring their left hand and keyboard isn't.
-- [ ] 💟 Publish
+- [x] 💟 Publish `0.1`
 
 ### Basic features
 
+- [ ] 💙 Prevent the logger from trying to create log files unnecessarily
+- [ ] 💜 Make textures for the blocks and environment that are specific to this game rather than reusing the old ones.
+- [ ] 💜 Create a player sprite/animation for this game.
+- [ ] 💟💜 Game icon
 - [ ] 💙 (Performance) Use a one-second timer to update the right-side time label text instead of updatnig it at
   every `_process` call
 - [ ] 💙 Make the non-pressed control previews slightly transparent so that the controls feel more responsive
@@ -89,7 +93,12 @@ A< >B
 - [ ] 💛 Player hit sound
 - [ ] 💛 Win sound
 - [ ] 💛 Lose sound
-- [ ] 💜 Make textures for the blocks and environment that are specific to this game rather than reusing the old ones.
+- [ ] 💟💜 Cover image (630x500 or upscaled 315x250)
+- [ ] 💟💜 Screenshots
+- [ ] 💟 Publish `0.2`
+
+### Advanced features
+
 - [ ] 💙 More levels
 - [ ] 💙 The progress is saved automatically after each level. At the end of the level, the player is given two
   options: 'Next level' and 'Main menu'. Also, the player should be informed that the progress has been saved. Note that
@@ -101,14 +110,10 @@ A< >B
 - [ ] 💙 Keep track of the total time.
 - [ ] 💙 Player shooting
 - [ ] 💛 Shooting sound
-- [ ] 💙 💜 Block destruction (appearing as progressive cracks no the blocks rather than health bars)
+- [ ] 💙💜 Block destruction (appearing as progressive cracks no the blocks rather than health bars)
 - [ ] 💛 Block hit sound
 - [ ] 💙 End-level upgrades
 - [ ] 💙 The player bullets can damage tiles as well
-
-### Advanced features
-
-- [ ] 💜 Unique player sprite and animation.
 
 ### Expert features
 

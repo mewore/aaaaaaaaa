@@ -3,7 +3,7 @@ import socketserver
 import os
 
 current_dir = os.path.dirname(__file__)
-project_dir = os.path.join(current_dir, 'export', 'indev', 'html')
+project_dir = os.path.join(current_dir, 'export', '0.1-mvp', 'web')
 os.chdir(project_dir)
 
 PORT = 8000
