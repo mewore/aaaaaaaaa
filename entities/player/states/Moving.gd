@@ -1,6 +1,7 @@
 extends PlayerState
 
-onready var SCREAM_CLEAR_TIMER := $ScreamClear
+onready var SCREAM_CLEAR_TIMER := $ScreamClear as Timer
+onready var AUTO_SCREAM_TIMER := $AutoScream as Timer
 
 const HP_LOST_PER_SECOND := 0.02
 const HP_LOST_PER_DAMAGE_PER_SECOND := 0.03
@@ -17,9 +18,10 @@ func physics_process(delta: float) -> void:
 
 func unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("scream"):
-        var scream_heal := self.player.add_scream()
-        SCREAM_CLEAR_TIMER.start()
-        self.player.hp = min(self.player.hp + scream_heal, Player.MAX_HP)
+        AUTO_SCREAM_TIMER.start()
+        self.perform_the_forbidden_art_of_screaming()
+    elif event.is_action_released("scream"):
+        AUTO_SCREAM_TIMER.stop()
     else:
         self.player.handle_jump_control(event)
 
@@ -29,3 +31,14 @@ func _on_Player_reached_win_area() -> void:
 func _on_ScreamClear_timeout() -> void:
     if self.active:
         self.player.clear_scream()
+
+func _on_AutoScream_timeout():
+    if self.active and Input.is_action_pressed("scream"):
+        self.perform_the_forbidden_art_of_screaming()
+    else:
+        AUTO_SCREAM_TIMER.stop()
+
+func perform_the_forbidden_art_of_screaming() -> void:
+    var scream_heal := self.player.add_scream()
+    SCREAM_CLEAR_TIMER.start()
+    self.player.hp = min(self.player.hp + scream_heal, Player.MAX_HP)

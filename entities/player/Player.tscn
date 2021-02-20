@@ -155,6 +155,9 @@ script = ExtResource( 3 )
 wait_time = 0.5
 one_shot = true
 
+[node name="AutoScream" type="Timer" parent="StateMachine/Moving"]
+wait_time = 0.3
+
 [node name="Dying" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
 
@@ -204,5 +207,6 @@ anims/winning = SubResource( 7 )
 position = Vector2( 0, -16 )
 [connection signal="reached_win_area" from="." to="StateMachine/Moving" method="_on_Player_reached_win_area"]
 [connection signal="timeout" from="StateMachine/Moving/ScreamClear" to="StateMachine/Moving" method="_on_ScreamClear_timeout"]
+[connection signal="timeout" from="StateMachine/Moving/AutoScream" to="StateMachine/Moving" method="_on_AutoScream_timeout"]
 [connection signal="timeout" from="StateMachine/Dying/Duration" to="StateMachine/Dying" method="_on_Duration_timeout"]
 [connection signal="timeout" from="StateMachine/Winning/Duration" to="StateMachine/Winning" method="_on_Duration_timeout"]

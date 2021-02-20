@@ -75,6 +75,8 @@ A< >B
 - [x] 💙 The player can be hit by the falling blocks (their underside, to be specific). When hit, the falling block is
   destroyed, and the player's HP starts going down faster.
 - [x] 💙 Player HP preview on the right side of the screen
+- [x] 💙 Let the player hold down the A key instead of spam-pressing it. Stressing the player out may be on the menu,
+  but injuring their left hand and keyboard isn't.
 - [ ] 💟 Publish
 
 ### Basic features
