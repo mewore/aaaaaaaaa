@@ -1,27 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/default-theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/hud/Hud.gd" type="Script" id=2]
-[ext_resource path="res://ui/hud/control-icons.png" type="Texture" id=3]
+[ext_resource path="res://ui/hud/input-preview/InputPreview.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/hp-bar/HpBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/small-font-theme.tres" type="Theme" id=5]
 [ext_resource path="res://ui/time-label/TimeLabel.tscn" type="PackedScene" id=6]
-
-[sub_resource type="Animation" id=1]
-resource_name = "inputs_changed"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("InputWrapper/InputControl/InputPreview:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 0.5, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
 
 [node name="Hud" type="VBoxContainer"]
 margin_left = 392.0
@@ -63,56 +47,7 @@ margin_right = 60.0
 margin_bottom = 57.0
 rect_min_size = Vector2( 0, 50 )
 
-[node name="InputPreview" type="Node2D" parent="InputWrapper/InputControl"]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0, 40 )
-
-[node name="MoveLeft" type="Node2D" parent="InputWrapper/InputControl/InputPreview"]
-position = Vector2( -24, 0 )
-
-[node name="Action" type="Sprite" parent="InputWrapper/InputControl/InputPreview/MoveLeft"]
-texture = ExtResource( 3 )
-vframes = 2
-hframes = 8
-
-[node name="Input" type="Sprite" parent="InputWrapper/InputControl/InputPreview/MoveLeft"]
-position = Vector2( -16, 0 )
-texture = ExtResource( 3 )
-vframes = 2
-hframes = 8
-frame = 8
-
-[node name="MoveRight" type="Node2D" parent="InputWrapper/InputControl/InputPreview"]
-position = Vector2( 24, 0 )
-
-[node name="Action" type="Sprite" parent="InputWrapper/InputControl/InputPreview/MoveRight"]
-texture = ExtResource( 3 )
-vframes = 2
-hframes = 8
-frame = 1
-
-[node name="Input" type="Sprite" parent="InputWrapper/InputControl/InputPreview/MoveRight"]
-position = Vector2( 16, 0 )
-texture = ExtResource( 3 )
-vframes = 2
-hframes = 8
-frame = 9
-
-[node name="Jump" type="Node2D" parent="InputWrapper/InputControl/InputPreview"]
-position = Vector2( 0, -24 )
-
-[node name="Action" type="Sprite" parent="InputWrapper/InputControl/InputPreview/Jump"]
-texture = ExtResource( 3 )
-vframes = 2
-hframes = 8
-frame = 2
-
-[node name="Input" type="Sprite" parent="InputWrapper/InputControl/InputPreview/Jump"]
-position = Vector2( 0, -16 )
-texture = ExtResource( 3 )
-vframes = 2
-hframes = 8
-frame = 10
+[node name="InputPreview" parent="InputWrapper/InputControl" instance=ExtResource( 3 )]
 
 [node name="ControlScrambleTimerTitle" type="Label" parent="."]
 self_modulate = Color( 0.388235, 0.470588, 0.490196, 1 )
@@ -179,7 +114,4 @@ margin_right = 120.0
 margin_bottom = 276.0
 theme = ExtResource( 5 )
 align = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/inputs_changed = SubResource( 1 )
 [connection signal="updated" from="ControlScrambleTimer" to="." method="_on_ControlScrambleTimer_updated"]

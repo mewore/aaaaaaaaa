@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/hp-bar/HpBar.gd"
 }, {
+"base": "Node2D",
+"class": "InputPreview",
+"language": "GDScript",
+"path": "res://ui/hud/input-preview/InputPreview.gd"
+}, {
 "base": "Reference",
 "class": "Log",
 "language": "GDScript",
@@ -91,6 +96,7 @@ _global_script_class_icons={
 "FallingBlockContainer": "",
 "FallingBlockSettings": "",
 "HpBar": "",
+"InputPreview": "",
 "Log": "",
 "OptionContanier": "",
 "Player": "",

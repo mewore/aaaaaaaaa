@@ -91,7 +91,7 @@ A< >B
 - [x] 💟💜 Game icon
 - [x] 💙 (Performance) Use a one-second timer to update the right-side time label text instead of updating it at
   every `_process` call
-- [ ] 💙 Make the non-pressed control previews slightly transparent so that the controls feel more responsive
+- [x] 💙 Make the non-pressed control previews slightly transparent so that the controls feel more responsive
 - [ ] 💛 Menu sounds
 - [ ] 💙 Sound configuration for the menu
 - [ ] 💛 Player hit sound
