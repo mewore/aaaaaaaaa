@@ -93,7 +93,7 @@ A< >B
   every `_process` call
 - [x] 💙 Make the non-pressed control previews slightly transparent so that the controls feel more responsive
 - [x] 💛 Menu sounds
-- [ ] 💙 Sound configuration for the menu
+- [x] 💙 Sound configuration for the menu
 - [ ] 💛 Player hit sound
 - [ ] 💛 Win sound
 - [ ] 💛 Lose sound

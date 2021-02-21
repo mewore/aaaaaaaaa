@@ -193,7 +193,7 @@ position = Vector2( 0, -1 )
 shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -2.07583, -3.08058 )
+position = Vector2( 0, -2 )
 texture = ExtResource( 6 )
 vframes = 8
 hframes = 8
@@ -218,7 +218,6 @@ position = Vector2( 0, -24 )
 [node name="InputPreview" parent="." instance=ExtResource( 11 )]
 modulate = Color( 1, 1, 1, 0.588235 )
 position = Vector2( 0, -40 )
-INACTIVE_ACTION_OPACITY = 0.5
 [connection signal="reached_win_area" from="." to="StateMachine/Moving" method="_on_Player_reached_win_area"]
 [connection signal="timeout" from="StateMachine/Moving/ScreamClear" to="StateMachine/Moving" method="_on_ScreamClear_timeout"]
 [connection signal="timeout" from="StateMachine/Moving/AutoScream" to="StateMachine/Moving" method="_on_AutoScream_timeout"]

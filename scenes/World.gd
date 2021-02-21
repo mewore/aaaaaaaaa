@@ -48,7 +48,7 @@ func set_paused(new_paused: bool) -> void:
     paused = new_paused
     LEVEL_OVER_MENU.visible = paused
     get_tree().paused = paused
-    LEVEL_OVER_OPTION_CONTAINER.active_option_index = 0
+    LEVEL_OVER_OPTION_CONTAINER.active_item_index = 0
     self.pause_screen = PauseScreen.MAIN
 
 func set_pause_screen(new_pause_screen: int) -> void:

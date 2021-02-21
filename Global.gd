@@ -6,9 +6,15 @@ const SAVE_DIRECTORY = "user://"
 const SAVE_FILE_PREFIX = "save-"
 const SAVE_FILE_SUFFIX = ".json"
 
-const DEFAULT_SAVE_FILE := "default";
+const SETTINGS_SAVE_FILE := "settings"
+const DEFAULT_SAVE_FILE := "default"
 
+var settings: GameSettings = GameSettings.new()
 var game_data: Dictionary = {}
+
+func _ready() -> void:
+    if self.save_file_exists(SETTINGS_SAVE_FILE):
+        self.settings.initialize_from_dictionary(self.load_data(SETTINGS_SAVE_FILE))
 
 func get_world_info() -> WorldInfo:
     return get_tree().get_nodes_in_group("world_info").front()
@@ -31,19 +37,25 @@ func save_game(save_name: String, save_to_overwrite: String = "") -> void:
                 if not game_data.erase(key):
                     print("Tried to erase a non-existent game data key '%s'!" % key)
 
-    var new_save_file_name: String = SAVE_DIRECTORY + "/" + SAVE_FILE_PREFIX + save_name + SAVE_FILE_SUFFIX
-    
-    var file: File = File.new()
-    LOG.check_error_code(file.open(new_save_file_name, File.WRITE), "Opening '%s'" % new_save_file_name)
-    LOG.info("Saving to: " + file.get_path_absolute())
-    file.store_string(to_json(game_data))
-    file.close()
+    save_data(save_name, game_data)
     
     if not save_to_overwrite.empty() and save_to_overwrite != save_name:
         var dir: Directory = self.open_save_directory()
         var old_save_file_name: String = SAVE_FILE_PREFIX + save_to_overwrite + SAVE_FILE_SUFFIX
         if dir.file_exists(old_save_file_name):
             LOG.check_error_code(dir.remove(old_save_file_name), "Removing '%s'" % [old_save_file_name])
+
+func save_settings() -> void:
+    save_data(SETTINGS_SAVE_FILE, self.settings.as_dictionary())
+
+func save_data(save_name: String, data: Dictionary) -> void:
+    var path := self.get_save_file_path(save_name)
+    LOG.info("Saving data to: %s" % path)
+    var file := File.new()
+    LOG.check_error_code(file.open(path, File.WRITE), "Opening '%s'" % path)
+    LOG.info("Saving to: " + file.get_path_absolute())
+    file.store_string(to_json(data))
+    file.close()
 
 func get_save_files() -> PoolStringArray:
     var dir: Directory = self.open_save_directory()
@@ -70,17 +82,32 @@ func open_save_directory() -> Directory:
     LOG.check_error_code(dir.open(SAVE_DIRECTORY), "Opening " + SAVE_DIRECTORY)
     return dir
 
-func load_game(save_name: String) -> void:
-    var file = File.new()
-    var save_file_path: String = SAVE_DIRECTORY + "/" + SAVE_FILE_PREFIX + save_name + SAVE_FILE_SUFFIX
-    if not file.file_exists(save_file_path):
-        LOG.error("No such file: " + save_file_path)
-        return
+func load_game(save_name: String) -> bool:
+    if not self.save_file_exists(save_name):
+        LOG.error("No such savefile: " + save_name)
+        return false
+    var loaded_data := self.load_data(save_name)
+    if loaded_data.empty():
+        return false
+    self.game_data = loaded_data
+    return true
 
-    LOG.check_error_code(file.open(save_file_path, File.READ), "Opening file " + save_file_path)
-    var loaded_data = parse_json(file.get_as_text())
+func save_file_exists(save_name: String) -> bool:
+    var path := self.get_save_file_path(save_name)
+    return File.new().file_exists(path)
+
+func load_data(save_name: String) -> Dictionary:
+    var path := self.get_save_file_path(save_name)
+    var file := File.new()
+    LOG.check_error_code(file.open(path, File.READ), "Opening file " + path)
+    var raw_data := file.get_as_text()
     file.close()
+    var loaded_data = parse_json(raw_data)
     if loaded_data is Dictionary:
-        game_data = loaded_data
+        return loaded_data
     else:
-        LOG.error("Corrupted savegame data!")
+        LOG.error("Corrupted savegame data in file '%s'!" % path)
+        return {}
+
+static func get_save_file_path(save_name: String) -> String:
+    return SAVE_DIRECTORY + "/" + SAVE_FILE_PREFIX + save_name + SAVE_FILE_SUFFIX
