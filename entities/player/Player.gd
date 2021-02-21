@@ -131,7 +131,7 @@ func move(delta: float) -> void:
         last_jumped = OS.get_ticks_msec()
     
     motion = move_and_slide(motion, Vector2.UP)
-    if self.position.y < WIN_Y and has_touched_map():
+    if self.is_on_floor() and self.position.y < WIN_Y and has_touched_map():
         self.emit_signal("reached_win_area")
 
 func has_touched_map() -> bool:
