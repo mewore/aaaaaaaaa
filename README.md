@@ -87,7 +87,7 @@ A< >B
 - [x] 💙 When the inputs have changed, stop the falling blocks for a while and show the inputs close to the character
 - [x] 💙 The falling blocks are slow initially, and their speed gradually increases
 - [x] 💜 Create a player sprite/animation for this game.
-- [ ] 💙 Screen shake when screaming
+- [x] 💙 Screen shake when screaming
 - [ ] 💟💜 Game icon
 - [ ] 💙 (Performance) Use a one-second timer to update the right-side time label text instead of updating it at
   every `_process` call

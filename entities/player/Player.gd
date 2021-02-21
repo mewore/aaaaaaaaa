@@ -37,6 +37,7 @@ export(PackedScene) var SCREAM_SCENE: PackedScene
 onready var SCREAMING_CONTAINER := $ScreamingContainer as Node2D
 export(float) var LOWERCASE_SCREAM_HEAL: float = 0.01
 export(float) var UPPERCASE_SCREAM_HEAL: float = 0.05
+export(float) var SCREAM_SHAKE_COEFFICIENT: float = 0.5
 
 onready var SPRITE: Sprite = $Sprite
 onready var ANIMATION_PLAYER: AnimationPlayer = $Sprite/AnimationPlayer
@@ -146,6 +147,8 @@ func add_scream() -> float:
         scream.position.x = scream_count * SCREAM_WIDTH
         scream.uppercase = scream_count >= LOWERCASE_CAPITAL_SCREAMS
         SCREAMING_CONTAINER.add_child(scream)
+        var uppercase_capital_screams := int(max((scream_count + 1) - LOWERCASE_CAPITAL_SCREAMS, 0))
+        CAMERA.shake(uppercase_capital_screams * SCREAM_SHAKE_COEFFICIENT)
         return UPPERCASE_SCREAM_HEAL if scream.uppercase else LOWERCASE_SCREAM_HEAL
     return 0.0
 
