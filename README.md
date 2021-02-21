@@ -85,7 +85,7 @@ A< >B
 - [x] 💜 Make textures for the blocks and environment that are specific to this game rather than reusing the old ones.
 - [x] 💙 When the player HP is low, show the HP bar where the character is
 - [x] 💙 When the inputs have changed, stop the falling blocks for a while and show the inputs close to the character
-- [ ] 💙 The falling blocks are slow initially, and their speed gradually increases
+- [x] 💙 The falling blocks are slow initially, and their speed gradually increases
 - [ ] 💜 Create a player sprite/animation for this game.
 - [ ] 💟💜 Game icon
 - [ ] 💙 (Performance) Use a one-second timer to update the right-side time label text instead of updating it at
@@ -96,6 +96,8 @@ A< >B
 - [ ] 💛 Player hit sound
 - [ ] 💛 Win sound
 - [ ] 💛 Lose sound
+- [ ] 💛 Main menu music
+- [ ] 💛 World music (including when the game is paused between levels)
 - [ ] 💟💜 Cover image (630x500 or upscaled 315x250)
 - [ ] 💟💜 Screenshots
 - [ ] 💟 Publish `0.2`
@@ -107,6 +109,7 @@ A< >B
   options: 'Next level' and 'Main menu'. Also, the player should be informed that the progress has been saved. Note that
   starting a new game does not erase the old progress until the level has been won. After the last level, the player is
   invited to an Easter-egg-ish room. (No idea what it will contain yet)
+- [ ] 💜 Some background decorations
 - [ ] 💙 When starting a new game, if there is already some saved progress, warn the player that upon the completion of
   the first level, the previous progress will be lost forever.
 - [ ] 💙 Ability to load the progress with a 'Continue' button (visible only if there's already a saved game).

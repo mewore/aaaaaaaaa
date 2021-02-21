@@ -37,7 +37,7 @@ func _ready() -> void:
 
 func _physics_process(delta : float) -> void:
     if not map_to_merge_into:
-        self.position.y += (settings.get_fall_speed() if settings else FallingBlockSettings.FALL_DOWN_SPEED) * delta
+        self.position.y += (settings.get_fall_speed() if settings else FallingBlockSettings.DEFAULT_FALL_SPEED) * delta
 
 func _process(_delta: float) -> void:
     if map_to_merge_into:

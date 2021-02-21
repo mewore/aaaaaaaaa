@@ -22,6 +22,8 @@ onready var BLOCKS_PER_ROW := int((MAX_SPAWN_X - MIN_SPAWN_X) / CELL_SIZE.x) + 1
 
 onready var ANIMATION_PLAYER := $AnimationPlayer
 onready var SETTINGS := $Settings as FallingBlockSettings
+const INITIAL_FALL_SPEED := 20.0
+const SPEED_INCREASE_PER_SECOND := 0.5
 
 var topmost_row: BlockRow
 
@@ -29,6 +31,7 @@ func _ready() -> void:
     RNG.seed = self.name.hash()
     topmost_row = create_row_at_y(get_player_sight_line_y())
     topmost_row.add_all_blocks(self)
+    SETTINGS.base_speed = INITIAL_FALL_SPEED
 
 func _process(delta: float) -> void:
     if not topmost_row:
@@ -40,6 +43,7 @@ func _process(delta: float) -> void:
         topmost_row.set_upper_row(new_row)
         topmost_row = new_row
         topmost_row.add_all_blocks(self)
+    SETTINGS.base_speed += SPEED_INCREASE_PER_SECOND * delta
 
 func create_row_at_y(y: float) -> BlockRow:
     return BlockRow.new(Vector2(MIN_SPAWN_X, y), BLOCKS_PER_ROW, FALLING_BLOCK_SCENE, CELL_SIZE.x, BLOCK_DENSITY, RNG,
