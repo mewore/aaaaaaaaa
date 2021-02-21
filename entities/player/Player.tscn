@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://entities/player/a/A.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://entities/player/states/Winning.gd" type="Script" id=10]
 [ext_resource path="res://ui/hud/input-preview/InputPreview.tscn" type="PackedScene" id=11]
 [ext_resource path="res://entities/player/sfx/hurt.wav" type="AudioStream" id=12]
+[ext_resource path="res://entities/player/sfx/death.wav" type="AudioStream" id=13]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.236735, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.506122, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -168,6 +169,12 @@ wait_time = 0.3
 script = ExtResource( 5 )
 
 [node name="Duration" type="Timer" parent="StateMachine/Dying"]
+wait_time = 1.5
+one_shot = true
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="StateMachine/Dying"]
+stream = ExtResource( 13 )
+bus = "SFX"
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource( 8 )
