@@ -110,7 +110,7 @@ options = PoolStringArray( "Restart", "Main menu" )
 [connection signal="timeout" from="GameWrapper/InputScrambleTimer" to="." method="_on_InputScrambleTimer_timeout"]
 [connection signal="dead" from="GameWrapper/Player" to="." method="_on_Player_dead"]
 [connection signal="hit" from="GameWrapper/Player" to="HudLayer/Hud" method="_on_Player_hit"]
-[connection signal="reached_win_area" from="GameWrapper/Player" to="GameWrapper/FallingBlockContainer" method="_on_Player_reached_win_area"]
 [connection signal="reached_win_area" from="GameWrapper/Player" to="." method="_on_Player_reached_win_area"]
+[connection signal="reached_win_area" from="GameWrapper/Player" to="GameWrapper/FallingBlockContainer" method="_on_Player_reached_win_area"]
 [connection signal="won" from="GameWrapper/Player" to="." method="_on_Player_won"]
 [connection signal="option_selected" from="LevelOverMenuLayer/WorldPauseMenu/PauseOptionContainer" to="." method="_on_PauseOptionContainer_option_selected"]

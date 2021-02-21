@@ -88,7 +88,7 @@ A< >B
 - [x] 💙 The falling blocks are slow initially, and their speed gradually increases
 - [x] 💜 Create a player sprite/animation for this game.
 - [x] 💙 Screen shake when screaming
-- [ ] 💟💜 Game icon
+- [x] 💟💜 Game icon
 - [ ] 💙 (Performance) Use a one-second timer to update the right-side time label text instead of updating it at
   every `_process` call
 - [ ] 💙 Make the non-pressed control previews slightly transparent so that the controls feel more responsive
