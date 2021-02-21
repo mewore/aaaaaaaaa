@@ -3,8 +3,8 @@ extends PlayerState
 onready var SCREAM_CLEAR_TIMER := $ScreamClear as Timer
 onready var AUTO_SCREAM_TIMER := $AutoScream as Timer
 
-const HP_LOST_PER_SECOND := 0.02
-const HP_LOST_PER_DAMAGE_PER_SECOND := 0.03
+const HP_LOST_PER_SECOND := 0.05
+const HP_LOST_PER_DAMAGE_PER_SECOND := 0.02
 
 func process(delta: float) -> void:
     self.player.hp -= delta * HP_LOST_PER_SECOND

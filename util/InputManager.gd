@@ -8,7 +8,7 @@ const ACTION_COUNT = 5
 
 var action_symbols = ["X", "[ ]", "P", "8", "B"]
 var actions = ["action1", "action2", "action3", "action4", "action5"]
-const INITIAL_INPUT_MAPPING := PoolIntArray([0, 1, 2, 3, 4])
+const INITIAL_INPUT_MAPPING := PoolIntArray([0, 2, 1, 3, 4])
 var input_mapping := INITIAL_INPUT_MAPPING
 
 var move_left_action_index := 0 setget set_move_left_action_index
