@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://entities/player/a/A.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/player/Player.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://entities/hp-bar/HpBar.tscn" type="PackedScene" id=9]
 [ext_resource path="res://entities/player/states/Winning.gd" type="Script" id=10]
 [ext_resource path="res://ui/hud/input-preview/InputPreview.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/player/sfx/hurt.wav" type="AudioStream" id=12]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.236735, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.506122, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
@@ -218,6 +219,10 @@ position = Vector2( 0, -24 )
 [node name="InputPreview" parent="." instance=ExtResource( 11 )]
 modulate = Color( 1, 1, 1, 0.588235 )
 position = Vector2( 0, -40 )
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+bus = "SFX"
 [connection signal="reached_win_area" from="." to="StateMachine/Moving" method="_on_Player_reached_win_area"]
 [connection signal="timeout" from="StateMachine/Moving/ScreamClear" to="StateMachine/Moving" method="_on_ScreamClear_timeout"]
 [connection signal="timeout" from="StateMachine/Moving/AutoScream" to="StateMachine/Moving" method="_on_AutoScream_timeout"]

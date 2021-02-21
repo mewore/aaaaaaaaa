@@ -94,7 +94,9 @@ A< >B
 - [x] 💙 Make the non-pressed control previews slightly transparent so that the controls feel more responsive
 - [x] 💛 Menu sounds
 - [x] 💙 Sound configuration for the menu
-- [ ] 💛 Player hit sound
+- [x] 💛 Player hit sound
+- [ ] 💛 Player death sound
+- [ ] 💛 Screaming sound
 - [ ] 💛 Win sound
 - [ ] 💛 Lose sound
 - [ ] 💛 Main menu music
@@ -102,6 +104,7 @@ A< >B
 - [ ] 💟💜 Cover image (630x500 or upscaled 315x250)
 - [ ] 💟💜 Screenshots
 - [ ] 💙💜 Player trail particle effects
+- [ ] 💙 Split the player movement code away from the rest of the player code
 - [ ] 💟 Publish `0.2`
 
 ### Advanced features

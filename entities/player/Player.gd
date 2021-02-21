@@ -60,6 +60,7 @@ export(Curve) var HP_BAR_OPACITY_CURVE: Curve
 
 export(float) var HIT_DOWNWARD_SPEED := JUMP_SPEED
 var damage_taken := 0
+onready var HURT_SOUND := $HurtSound as AudioStreamPlayer
 
 func set_hp(new_hp: float) -> void:
     hp = new_hp
@@ -80,6 +81,7 @@ func take_damage(damage: int = 1) -> void:
     self.clear_scream()
     CAMERA.shake()
     emit_signal("hit")
+    HURT_SOUND.play()
 
 func megumin() -> void:
     CAMERA.shake()
