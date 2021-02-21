@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/time-label/TimeLabel.gd" type="Script" id=1]
+
+[node name="TimeLabel" type="Label"]
+self_modulate = Color( 0.329412, 0.2, 0.266667, 1 )
+margin_top = 134.0
+margin_right = 120.0
+margin_bottom = 162.0
+text = "00:00"
+align = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Update" type="Timer" parent="."]
+[connection signal="timeout" from="Update" to="." method="_on_Update_timeout"]

@@ -8,7 +8,7 @@ onready var MOVE_LEFT_INPUT_ICON := $InputWrapper/InputControl/InputPreview/Move
 onready var MOVE_RIGHT_INPUT_ICON := $InputWrapper/InputControl/InputPreview/MoveRight/Input as Sprite
 onready var JUMP_INPUT_ICON := $InputWrapper/InputControl/InputPreview/Jump/Input as Sprite
 
-onready var TIME_LABEL := $ControlScrambleTimer as Label
+onready var TIME_LABEL := $ControlScrambleTimer as TimeLabel
 export(Color) var TIME_WARNING_COLOUR: Color
 onready var NORMAL_TIME_COLOUR = TIME_LABEL.self_modulate
 
@@ -29,17 +29,6 @@ func _ready() -> void:
         "Connecting the InputManager 'inputs_changed' signal")
 
 func _process(_delta: float) -> void:
-    if active_timer:
-        var time_left_seconds_total := int(floor(active_timer.time_left))
-        var minutes_left := int(float(time_left_seconds_total) / 60)
-        var seconds_left := time_left_seconds_total % 60
-        var time_text := "%d%d:%d%d" % [int(float(minutes_left) / 10), minutes_left % 10,
-            int(float(seconds_left) / 10), seconds_left % 10]
-        if time_text != TIME_LABEL.text:
-            TIME_LABEL.text = time_text
-            TIME_LABEL.self_modulate = TIME_WARNING_COLOUR \
-                if TIME_WARNING_COLOUR and (minutes_left == 0 and seconds_left < 10 and seconds_left % 2 == 1) \
-                else NORMAL_TIME_COLOUR
     if PLAYER:
         HP_BAR.set_hp_ratio(PLAYER.hp / Player.MAX_HP)
 
@@ -53,10 +42,15 @@ func refresh_input_icons() -> void:
     $AnimationPlayer.play("inputs_changed")
 
 func _on_World_active_timer_changed(new_active_timer: Timer) -> void:
-    self.active_timer = new_active_timer
-
+    TIME_LABEL.timer = new_active_timer
 
 func _on_Player_hit() -> void:
     if DAMAGE_TAKEN_LABEL.text.count("x") % DAMAGE_TAKEN_SYMBOLS_PER_LINE == 0:
         DAMAGE_TAKEN_LABEL.text += '\n';
     DAMAGE_TAKEN_LABEL.text += 'x'
+
+func _on_ControlScrambleTimer_updated(total_seconds_left: int) -> void:
+    print("a ", total_seconds_left)
+    TIME_LABEL.self_modulate = TIME_WARNING_COLOUR \
+        if TIME_WARNING_COLOUR and (total_seconds_left < 10 and total_seconds_left % 2 == 1) \
+        else NORMAL_TIME_COLOUR

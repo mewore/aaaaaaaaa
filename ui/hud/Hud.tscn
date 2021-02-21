@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/default-theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/hud/Hud.gd" type="Script" id=2]
 [ext_resource path="res://ui/hud/control-icons.png" type="Texture" id=3]
 [ext_resource path="res://entities/hp-bar/HpBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/small-font-theme.tres" type="Theme" id=5]
+[ext_resource path="res://ui/time-label/TimeLabel.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "inputs_changed"
@@ -124,13 +125,7 @@ scrambled
 after:"
 align = 1
 
-[node name="ControlScrambleTimer" type="Label" parent="."]
-self_modulate = Color( 0.329412, 0.2, 0.266667, 1 )
-margin_top = 134.0
-margin_right = 120.0
-margin_bottom = 162.0
-text = "00:00"
-align = 1
+[node name="ControlScrambleTimer" parent="." instance=ExtResource( 6 )]
 
 [node name="Spacer" type="Control" parent="."]
 margin_top = 166.0
@@ -187,3 +182,4 @@ align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/inputs_changed = SubResource( 1 )
+[connection signal="updated" from="ControlScrambleTimer" to="." method="_on_ControlScrambleTimer_updated"]

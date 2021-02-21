@@ -82,6 +82,7 @@ func take_damage(damage: int = 1) -> void:
     emit_signal("hit")
 
 func megumin() -> void:
+    CAMERA.shake()
     ANIMATION_PLAYER.play("dying")
     self.clear_scream()
 
