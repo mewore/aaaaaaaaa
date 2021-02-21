@@ -9,6 +9,8 @@ onready var TITLE_NODE: Label = $Title
 export(String) var title: String setget set_title, get_title
 onready var LIST_NODE: Label = $List
 
+export(bool) var enabled: bool = true
+
 export(int) var visible_option_count: int = 5 setget set_visible_option_count
 
 # May add a circular wrap-around type
@@ -19,6 +21,9 @@ export(PoolStringArray) var options: PoolStringArray = PoolStringArray([]) setge
 var active_option_index: int = 0 setget set_active_option_index
 var visible_from: int = 0
 var visible_to: int = int(min(visible_option_count - 1, options.size() - 1))
+
+onready var NAVIGATE_SOUND_PLAYER := $NavigateSoundPlayer as AudioStreamPlayer
+onready var SELECT_SOUND_PLAYER := $SelectSoundPlayer as AudioStreamPlayer
 
 func _ready() -> void:
     self.title = title
@@ -93,15 +98,18 @@ func is_index_in_option_range(index: int, from: int = 0, to: int = self.options.
         else ((index >= from and index < self.options.size()) or (index >= 0 and index <= to))
 
 func _input(event: InputEvent) -> void:
-    if not self.is_visible_in_tree():
+    if not self.enabled or not self.is_visible_in_tree():
         return
     
     if event.is_action_pressed("ui_down"):
         self.active_option_index += 1
+        NAVIGATE_SOUND_PLAYER.play()
     elif event.is_action_pressed("ui_up"):
         self.active_option_index -= 1
+        NAVIGATE_SOUND_PLAYER.play()
     elif event.is_action_pressed("ui_select"):
         emit_signal("option_selected", self.active_option_index, self.options[self.active_option_index])
+        SELECT_SOUND_PLAYER.play()
 
 func update_list_text() -> void:
     var list_node: Label = get_node_or_null("List") if Engine.editor_hint else LIST_NODE

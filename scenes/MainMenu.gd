@@ -14,6 +14,8 @@ const NO_SAVED_GAMES_PSEUDO_OPTION := "No saved games"
 var MAIN_OPTION_SET := OptionSet.new("Main menu")
 var active_options: OptionSet setget set_active_options
 
+onready var FADE_OVERLAY := $FadeOverlay as FadeOverlay
+
 func _ready() -> void:
     var main_options: PoolStringArray = PoolStringArray([NEW_GAME_OPTION])
     if not OS.has_feature("web"):
@@ -32,8 +34,12 @@ func _on_OptionContainer_option_selected(_option_index: int, option: String) -> 
         MAIN_OPTION_SET:
             match option:
                 NEW_GAME_OPTION:
+                    FADE_OVERLAY.fade_out()
+                    yield(FADE_OVERLAY, "faded_out")
                     self.start_game()
                 EXIT_OPTION:
+                    FADE_OVERLAY.fade_out()
+                    yield(FADE_OVERLAY, "faded_out")
                     get_tree().quit()
                 _:
                     assert(false, "Don't know how to handle option: '%s'" % option)
@@ -52,6 +58,9 @@ func _input(event: InputEvent) -> void:
     if event.is_action_pressed("ui_cancel") and active_options != MAIN_OPTION_SET:
         self.active_options = MAIN_OPTION_SET
         self.accept_event()
+
+func _on_FadeOverlay_started_fading_out() -> void:
+    OPTION_CONTAINER.enabled = false
 
 class OptionSet:
     var title: String

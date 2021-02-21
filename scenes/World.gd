@@ -6,6 +6,7 @@ var LOG: Log = LogManager.get_log(self)
 
 onready var LEVEL_OVER_MENU := $LevelOverMenuLayer/WorldPauseMenu as CanvasItem
 onready var LEVEL_OVER_OPTION_CONTAINER := $LevelOverMenuLayer/WorldPauseMenu/PauseOptionContainer as OptionContanier
+onready var FADE_OVERLAY := $FadeOverlay as FadeOverlay
 
 var paused: bool = false setget set_paused
 
@@ -63,9 +64,13 @@ func set_pause_screen(new_pause_screen: int) -> void:
 func _on_PauseOptionContainer_option_selected(_option_index: int, option: String) -> void:
     match option:
         "Restart":
+            FADE_OVERLAY.fade_out()
+            yield(FADE_OVERLAY, "faded_out")
             self.paused = false
             LOG.check_error_code(get_tree().reload_current_scene(), "Reloading the world")
         "Main menu":
+            FADE_OVERLAY.fade_out()
+            yield(FADE_OVERLAY, "faded_out")
             self.paused = false
             LOG.check_error_code(get_tree().change_scene("res://scenes/MainMenu.tscn"),
                 "Switching to the Main Menu scene")
@@ -82,3 +87,6 @@ func _on_Player_reached_win_area() -> void:
 func _on_Player_dead() -> void:
     LEVEL_OVER_OPTION_CONTAINER.title = "Oof! You died..."
     self.paused = true
+
+func _on_FadeOverlay_started_fading_out() -> void:
+    LEVEL_OVER_OPTION_CONTAINER.enabled = false

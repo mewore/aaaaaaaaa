@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/options/OptionContainer.gd" type="Script" id=1]
+[ext_resource path="res://ui/options/sfx/select.wav" type="AudioStream" id=2]
+[ext_resource path="res://ui/options/sfx/navigate.wav" type="AudioStream" id=3]
 
 [node name="OptionContainer" type="VBoxContainer"]
 margin_top = 50.0
@@ -11,8 +13,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 title = "Title"
-visible_option_count = 5
-WRAP_TYPE = 0
 options = PoolStringArray( "Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6" )
 
 [node name="Title" type="Label" parent="."]
@@ -33,3 +33,11 @@ Option 3
 Option 4
 Option 5"
 align = 1
+
+[node name="NavigateSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "SFX"
+
+[node name="SelectSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "SFX"

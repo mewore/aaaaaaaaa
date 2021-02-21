@@ -193,11 +193,10 @@ position = Vector2( 0, -1 )
 shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -2 )
+position = Vector2( -2.07583, -3.08058 )
 texture = ExtResource( 6 )
 vframes = 8
 hframes = 8
-frame = 18
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 autoplay = "idle"
