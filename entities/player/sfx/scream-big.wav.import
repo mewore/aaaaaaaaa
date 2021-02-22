@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/scream-big.wav-e77f1ffb74092a0c7804f697469aadb0.sample"
+
+[deps]
+
+source_file="res://entities/player/sfx/scream-big.wav"
+dest_files=[ "res://.import/scream-big.wav-e77f1ffb74092a0c7804f697469aadb0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

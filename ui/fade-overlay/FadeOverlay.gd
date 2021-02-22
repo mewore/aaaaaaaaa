@@ -8,7 +8,7 @@ signal started_fading_out()
 onready var ANIMATION_PLAYER := $AnimationPlayer as AnimationPlayer
 
 func fade_out() -> void:
-    ANIMATION_PLAYER.queue("fade_out")
+    ANIMATION_PLAYER.play("fade_out")
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
     if anim_name == "fade_out":

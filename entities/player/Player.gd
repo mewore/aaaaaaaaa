@@ -144,7 +144,7 @@ func has_touched_map() -> bool:
 
 func add_scream() -> float:
     if SCREAM_SCENE:
-        var scream_count := SCREAMING_CONTAINER.get_child_count()
+        var scream_count := self.get_scream_count()
         SCREAMING_CONTAINER.position.x = -scream_count * SCREAM_WIDTH * 0.5
         var scream := SCREAM_SCENE.instance() as A
         scream.position.x = scream_count * SCREAM_WIDTH
@@ -154,6 +154,12 @@ func add_scream() -> float:
         CAMERA.shake(uppercase_capital_screams * SCREAM_SHAKE_COEFFICIENT)
         return UPPERCASE_SCREAM_HEAL if scream.uppercase else LOWERCASE_SCREAM_HEAL
     return 0.0
+
+func get_scream_count() -> int:
+    return SCREAMING_CONTAINER.get_child_count()
+
+func has_big_screams() -> bool:
+    return self.get_scream_count() > LOWERCASE_CAPITAL_SCREAMS
 
 func clear_scream() -> void:
     for _scream in SCREAMING_CONTAINER.get_children():

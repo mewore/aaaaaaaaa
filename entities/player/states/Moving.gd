@@ -2,6 +2,8 @@ extends PlayerState
 
 onready var SCREAM_CLEAR_TIMER := $ScreamClear as Timer
 onready var AUTO_SCREAM_TIMER := $AutoScream as Timer
+onready var SCREAM_SOUND_SMALL := $ScreamSmallSound as AudioStreamPlayer
+onready var SCREAM_SOUND_BIG := $ScreamBigSound as AudioStreamPlayer
 
 const HP_LOST_PER_SECOND := 0.05
 const HP_LOST_PER_DAMAGE_PER_SECOND := 0.02
@@ -42,3 +44,4 @@ func perform_the_forbidden_art_of_screaming() -> void:
     var scream_heal := self.player.add_scream()
     SCREAM_CLEAR_TIMER.start()
     self.player.hp = min(self.player.hp + scream_heal, Player.MAX_HP)
+    (SCREAM_SOUND_BIG if self.player.has_big_screams() else SCREAM_SOUND_SMALL).play()

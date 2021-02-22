@@ -96,7 +96,7 @@ A< >B
 - [x] 💙 Sound configuration for the menu
 - [x] 💛 Player hit sound
 - [x] 💛 Player death sound
-- [ ] 💛 Screaming sound
+- [x] 💛 Screaming sound
 - [ ] 💛 Win sound
 - [ ] 💛 Lose sound
 - [ ] 💛 Main menu music
