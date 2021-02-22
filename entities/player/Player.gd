@@ -27,6 +27,7 @@ var last_wanted_to_jump: int = -JUMP_INPUT_FORGIVENESS
 var last_able_to_jump: int = -JUMP_INPUT_FORGIVENESS
 var last_jumped: int = -JUMP_INPUT_FORGIVENESS
 var is_jumping: bool = false
+onready var JUMP_SOUND := $JumpSound as AudioStreamPlayer
 
 var motion: Vector2 = Vector2.ZERO
 
@@ -131,6 +132,7 @@ func move(delta: float) -> void:
         motion.y = -JUMP_SPEED
         is_jumping = true
         last_jumped = OS.get_ticks_msec()
+        JUMP_SOUND.play()
     
     motion = move_and_slide(motion, Vector2.UP)
     if self.is_on_floor() and self.position.y < WIN_Y and has_touched_map():

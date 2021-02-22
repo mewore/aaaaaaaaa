@@ -98,17 +98,18 @@ A< >B
 - [x] 💛 Player death sound (= lose sound)
 - [x] 💛 Screaming sound
 - [x] 💛 Win sound
+- [x] 💛 Jump sound
 - [ ] 💟💜 Cover image (630x500 or upscaled 315x250)
 - [ ] 💟💜 Screenshots
-- [ ] 💙💜 Player trail particle effects
+- [ ] 💙 More levels
 - [ ] 💟 Publish `0.2`
 
 ### Advanced features
 
+- [ ] 💙💜 Player trail particle effects
 - [ ] 💙 Split the player movement code away from the rest of the player code
 - [ ] 💛 Main menu music
 - [ ] 💛 World music (including when the game is paused between levels)
-- [ ] 💙 More levels
 - [ ] 💙 The progress is saved automatically after each level. At the end of the level, the player is given two
   options: 'Next level' and 'Main menu'. Also, the player should be informed that the progress has been saved. Note that
   starting a new game does not erase the old progress until the level has been won. After the last level, the player is
