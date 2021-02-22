@@ -3,7 +3,7 @@
 [ext_resource path="res://ui/default-theme.tres" type="Theme" id=1]
 [ext_resource path="res://ui/hud/Hud.gd" type="Script" id=2]
 [ext_resource path="res://ui/hud/input-preview/InputPreview.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/bar/line/LineBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/bar/icon/IconBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/small-font-theme.tres" type="Theme" id=5]
 [ext_resource path="res://ui/time-label/TimeLabel.tscn" type="PackedScene" id=6]
 
@@ -89,12 +89,6 @@ margin_right = 60.0
 margin_bottom = 8.0
 
 [node name="HpBar" parent="HpBarWrapper/HpBarControl" instance=ExtResource( 4 )]
-position = Vector2( 0, 0 )
-scale = Vector2( 3, 3 )
-invisible_when_full = true
-ratio = 1.0
-full_colour = Color( 0.5, 1, 0.83, 1 )
-empty_colour = Color( 0.8, 0.36, 0.36, 1 )
 
 [node name="Spacer2" type="Control" parent="."]
 margin_top = 232.0

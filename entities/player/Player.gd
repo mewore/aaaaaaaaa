@@ -39,6 +39,8 @@ onready var SCREAMING_CONTAINER := $ScreamingContainer as Node2D
 export(float) var LOWERCASE_SCREAM_HEAL: float = 0.01
 export(float) var UPPERCASE_SCREAM_HEAL: float = 0.05
 export(float) var SCREAM_SHAKE_COEFFICIENT: float = 0.5
+export(float, EASE) var SCREAM_HP_PREVIEW_EASE: float = 1.0
+onready var SCREAM_HP_PREVIEW_TIMER := $ScreamHpPreview as Timer
 
 onready var SPRITE: Sprite = $Sprite
 onready var ANIMATION_PLAYER: AnimationPlayer = $Sprite/AnimationPlayer
@@ -68,6 +70,9 @@ func set_hp(new_hp: float) -> void:
     HP_BAR.ratio = hp
     if HP_BAR_OPACITY_CURVE:
         HP_BAR.modulate.a = HP_BAR_OPACITY_CURVE.interpolate_baked(hp)
+    if not SCREAM_HP_PREVIEW_TIMER.is_stopped():
+        var time_ratio: float = 1.0 - SCREAM_HP_PREVIEW_TIMER.time_left / SCREAM_HP_PREVIEW_TIMER.wait_time
+        HP_BAR.modulate.a = max(HP_BAR.modulate.a, 1.0 - ease(time_ratio, SCREAM_HP_PREVIEW_EASE))
 
 func set_invulnerable(new_invulnerable: bool) -> void:
     if HURTBOX:
@@ -154,6 +159,7 @@ func add_scream() -> float:
         SCREAMING_CONTAINER.add_child(scream)
         var uppercase_capital_screams := int(max((scream_count + 1) - LOWERCASE_CAPITAL_SCREAMS, 0))
         CAMERA.shake(uppercase_capital_screams * SCREAM_SHAKE_COEFFICIENT)
+        SCREAM_HP_PREVIEW_TIMER.start()
         return UPPERCASE_SCREAM_HEAL if scream.uppercase else LOWERCASE_SCREAM_HEAL
     return 0.0
 
