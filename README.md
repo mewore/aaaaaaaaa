@@ -103,7 +103,7 @@ A< >B
 - [x] 💙 More levels
 - [x] 💙 Ability to load the progress with a 'Continue' button (visible only if there's already a saved game).
 - [x] 💟💜 Cover image (630x500 or upscaled 315x250)
-- [ ] 💟💜 Screenshots
+- [x] 💟💜 Screenshots
 - [ ] 💟 Publish `0.2`
 
 ### Advanced features
