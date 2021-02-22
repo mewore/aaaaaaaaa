@@ -100,7 +100,8 @@ A< >B
 - [x] 💛 Win sound
 - [x] 💛 Jump sound
 - [x] 💙💜 Icon-based HP bar
-- [ ] 💙 More levels
+- [x] 💙 More levels
+- [ ] 💙 Ability to load the progress with a 'Continue' button (visible only if there's already a saved game).
 - [ ] 💟💜 Cover image (630x500 or upscaled 315x250)
 - [ ] 💟💜 Screenshots
 - [ ] 💟 Publish `0.2`
@@ -118,7 +119,6 @@ A< >B
 - [ ] 💜 Some background decorations
 - [ ] 💙 When starting a new game, if there is already some saved progress, warn the player that upon the completion of
   the first level, the previous progress will be lost forever.
-- [ ] 💙 Ability to load the progress with a 'Continue' button (visible only if there's already a saved game).
 - [ ] 💙 Keep track of the total time.
 - [ ] 💙 Player shooting
 - [ ] 💛 Shooting sound

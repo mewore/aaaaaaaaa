@@ -24,20 +24,38 @@ color = Color( 0.556863, 0.627451, 0.568627, 1 )
 polygon = PoolVector2Array( 0, 0, 120, 0, 120, 304, 0, 304 )
 
 [node name="Border" type="Polygon2D" parent="."]
+color = Color( 0.388235, 0.470588, 0.490196, 1 )
+polygon = PoolVector2Array( -8, 0, 0, 0, 0, 304, -8, 304 )
+
+[node name="Border2" type="Polygon2D" parent="."]
+position = Vector2( -8, 0 )
 color = Color( 0.317647, 0.321569, 0.384314, 1 )
 polygon = PoolVector2Array( -8, 0, 0, 0, 0, 304, -8, 304 )
 
+[node name="MiniSpacer" type="Control" parent="."]
+margin_right = 120.0
+
+[node name="LevelTitle" type="Label" parent="."]
+self_modulate = Color( 0.388235, 0.470588, 0.490196, 1 )
+margin_top = 4.0
+margin_right = 120.0
+margin_bottom = 12.0
+theme = ExtResource( 5 )
+text = "[Level 1]"
+align = 1
+
 [node name="ControlsLabel" type="Label" parent="."]
 self_modulate = Color( 0.388235, 0.470588, 0.490196, 1 )
+margin_top = 16.0
 margin_right = 120.0
-margin_bottom = 28.0
+margin_bottom = 44.0
 text = "Controls"
 align = 1
 
 [node name="InputWrapper" type="CenterContainer" parent="."]
-margin_top = 32.0
+margin_top = 48.0
 margin_right = 120.0
-margin_bottom = 96.0
+margin_bottom = 112.0
 rect_min_size = Vector2( 0, 64 )
 
 [node name="InputControl" type="Control" parent="InputWrapper"]
@@ -51,9 +69,9 @@ rect_min_size = Vector2( 0, 50 )
 
 [node name="ControlScrambleTimerTitle" type="Label" parent="."]
 self_modulate = Color( 0.388235, 0.470588, 0.490196, 1 )
-margin_top = 100.0
+margin_top = 116.0
 margin_right = 120.0
-margin_bottom = 130.0
+margin_bottom = 146.0
 theme = ExtResource( 5 )
 text = "Controls
 scrambled
@@ -61,25 +79,27 @@ after:"
 align = 1
 
 [node name="ControlScrambleTimer" parent="." instance=ExtResource( 6 )]
+margin_top = 150.0
+margin_bottom = 178.0
 
 [node name="Spacer" type="Control" parent="."]
-margin_top = 166.0
+margin_top = 182.0
 margin_right = 120.0
-margin_bottom = 176.0
+margin_bottom = 192.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HpTitle" type="Label" parent="."]
 self_modulate = Color( 0.388235, 0.470588, 0.490196, 1 )
-margin_top = 180.0
+margin_top = 196.0
 margin_right = 120.0
-margin_bottom = 208.0
+margin_bottom = 224.0
 text = "HP"
 align = 1
 
 [node name="HpBarWrapper" type="CenterContainer" parent="."]
-margin_top = 212.0
+margin_top = 228.0
 margin_right = 120.0
-margin_bottom = 228.0
+margin_bottom = 244.0
 rect_min_size = Vector2( 0, 16 )
 
 [node name="HpBarControl" type="Control" parent="HpBarWrapper"]
@@ -90,26 +110,20 @@ margin_bottom = 8.0
 
 [node name="HpBar" parent="HpBarWrapper/HpBarControl" instance=ExtResource( 4 )]
 
-[node name="Spacer2" type="Control" parent="."]
-margin_top = 232.0
-margin_right = 120.0
-margin_bottom = 252.0
-rect_min_size = Vector2( 0, 20 )
-
 [node name="DamageTakenTitle" type="Label" parent="."]
 self_modulate = Color( 0.388235, 0.470588, 0.490196, 1 )
-margin_top = 256.0
+margin_top = 248.0
 margin_right = 120.0
-margin_bottom = 264.0
+margin_bottom = 256.0
 theme = ExtResource( 5 )
-text = "Hits Taken"
+text = "Hits Taken:"
 align = 1
 
 [node name="DamageTaken" type="Label" parent="."]
 self_modulate = Color( 0.545098, 0.25098, 0.286275, 1 )
-margin_top = 268.0
+margin_top = 260.0
 margin_right = 120.0
-margin_bottom = 276.0
+margin_bottom = 268.0
 theme = ExtResource( 5 )
 align = 1
 [connection signal="updated" from="ControlScrambleTimer" to="." method="_on_ControlScrambleTimer_updated"]

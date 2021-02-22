@@ -17,21 +17,41 @@ const MANUAL_PAUSING_ENABLED = false
 
 var input_rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
+export(int) var SCRAMBLE_TIME_DECREASE_PER_LEVEL := 2
 onready var INPUT_SCRAMBLE_TIMER: Timer = $GameWrapper/InputScrambleTimer
 var active_timer: Timer setget set_active_timer
+
+export(int) var BASE_LEVEL_HEIGHT := 1
+export(int) var HEIGHT_PER_LEVEL: int = 2
+onready var MAP := $GameWrapper/TileMap as Map
+onready var PLAYER := $GameWrapper/Player as Player
+
+const RESTART_LEVEL_OPTION := "Restart level"
+const NEXT_LEVEL_OPTION := "Next level"
+const MAIN_MENU_OPTION := "Main menu"
 
 func set_active_timer(new_active_timer: Timer) -> void:
     active_timer = new_active_timer
     emit_signal("active_timer_changed", active_timer)
 
 func _ready() -> void:
-    input_rng.seed = self.name.hash()
+    input_rng.seed = self.name.hash() + Global.current_level
     InputManager.unscramble_inputs()
+    if Global.current_level > Global.FIRST_LEVEL:
+        InputManager.scramble_inputs(input_rng)
     self.active_timer = INPUT_SCRAMBLE_TIMER
     var pause_overlay_polygon := $LevelOverMenuLayer/WorldPauseMenu/Overlay as Polygon2D
     var alpha: float = pause_overlay_polygon.color.a # a
     pause_overlay_polygon.color = ProjectSettings.get("rendering/environment/default_clear_color")
     pause_overlay_polygon.color.a = alpha
+    
+    INPUT_SCRAMBLE_TIMER.wait_time -= SCRAMBLE_TIME_DECREASE_PER_LEVEL * Global.current_level
+    
+    var map_height := BASE_LEVEL_HEIGHT + Global.current_level * HEIGHT_PER_LEVEL
+    MAP.initialize_with_height(map_height)
+    var cell_height := MAP.cell_size.y
+    PLAYER.position.y = cell_height * 0.5 + (map_height - 1) * cell_height
+    PLAYER.camera_bottom_limit = (map_height + 1) * cell_height
 
 func _on_InputScrambleTimer_timeout() -> void:
     InputManager.scramble_inputs(input_rng)
@@ -63,12 +83,18 @@ func set_pause_screen(new_pause_screen: int) -> void:
 
 func _on_PauseOptionContainer_option_selected(_option_index: int, option: String) -> void:
     match option:
-        "Restart":
+        RESTART_LEVEL_OPTION:
             FADE_OVERLAY.fade_out()
             yield(FADE_OVERLAY, "faded_out")
             self.paused = false
             LOG.check_error_code(get_tree().reload_current_scene(), "Reloading the world")
-        "Main menu":
+        NEXT_LEVEL_OPTION:
+            FADE_OVERLAY.fade_out()
+            yield(FADE_OVERLAY, "faded_out")
+            self.paused = false
+            Global.current_level += 1
+            LOG.check_error_code(get_tree().reload_current_scene(), "Reloading the world")
+        MAIN_MENU_OPTION:
             FADE_OVERLAY.fade_out()
             yield(FADE_OVERLAY, "faded_out")
             self.paused = false
@@ -79,6 +105,7 @@ func _on_PauseOptionContainer_option_selected(_option_index: int, option: String
 
 func _on_Player_won() -> void:
     LEVEL_OVER_OPTION_CONTAINER.title = "You win!"
+    LEVEL_OVER_OPTION_CONTAINER.options = PoolStringArray([NEXT_LEVEL_OPTION, MAIN_MENU_OPTION])
     self.paused = true
 
 func _on_Player_reached_win_area() -> void:
@@ -86,6 +113,7 @@ func _on_Player_reached_win_area() -> void:
 
 func _on_Player_dead() -> void:
     LEVEL_OVER_OPTION_CONTAINER.title = "Oof! You died..."
+    LEVEL_OVER_OPTION_CONTAINER.options = PoolStringArray([RESTART_LEVEL_OPTION, MAIN_MENU_OPTION])
     self.paused = true
 
 func _on_FadeOverlay_started_fading_out() -> void:

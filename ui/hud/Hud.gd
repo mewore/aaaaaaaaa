@@ -14,6 +14,9 @@ var active_timer: Timer
 export(NodePath) var PLAYER_NODE: NodePath
 onready var PLAYER := get_node_or_null(PLAYER_NODE) as Player
 
+func _ready() -> void:
+    $LevelTitle.text = "[Level %d]" % (Global.current_level + 1)
+
 func _process(_delta: float) -> void:
     if PLAYER:
         HP_BAR.ratio = PLAYER.hp / Player.MAX_HP

@@ -65,6 +65,8 @@ export(float) var HIT_DOWNWARD_SPEED := JUMP_SPEED
 var damage_taken := 0
 onready var HURT_SOUND := $HurtSound as AudioStreamPlayer
 
+var camera_bottom_limit: float setget set_camera_bottom_limit
+
 func set_hp(new_hp: float) -> void:
     hp = new_hp
     HP_BAR.ratio = hp
@@ -80,6 +82,14 @@ func set_invulnerable(new_invulnerable: bool) -> void:
 
 func get_invulnerable() -> bool:
     return not HURTBOX.monitorable if HURTBOX else true
+
+func set_camera_bottom_limit(new_camera_bottom_limit: float) -> void:
+    camera_bottom_limit = new_camera_bottom_limit
+    if CAMERA:
+        CAMERA.limit_bottom = int(camera_bottom_limit)
+
+func _ready() -> void:
+    CAMERA.limit_bottom = int(camera_bottom_limit)
 
 func take_damage(damage: int = 1) -> void:
     self.damage_taken += damage

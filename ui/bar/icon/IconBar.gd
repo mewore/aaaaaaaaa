@@ -24,7 +24,7 @@ func set_icon_texture(new_icon_texture: Texture) -> void:
         push_warning("The width of texture '%s' (%d) should be divisible by its height (%d)!" % [
             new_icon_texture.resource_path, width, height])
     icon_width = height
-    icon_hframes = int(width / icon_width)
+    icon_hframes = int(round(floor(width) / icon_width))
     icon_texture = new_icon_texture
     refresh_contents()
 

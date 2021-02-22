@@ -12,14 +12,15 @@ const DEFAULT_SAVE_FILE := "default"
 var settings: GameSettings = GameSettings.new()
 var game_data: Dictionary = {}
 
+const FIRST_LEVEL := 0
+var current_level := FIRST_LEVEL
+
 func _ready() -> void:
     if self.save_file_exists(SETTINGS_SAVE_FILE):
         self.settings.initialize_from_dictionary(self.load_data(SETTINGS_SAVE_FILE))
 
-func get_world_info() -> WorldInfo:
-    return get_tree().get_nodes_in_group("world_info").front()
-
 func new_game() -> void:
+    Global.current_level = FIRST_LEVEL
     self.game_data = {}
 
 func save_game(save_name: String, save_to_overwrite: String = "") -> void:
@@ -33,9 +34,9 @@ func save_game(save_name: String, save_to_overwrite: String = "") -> void:
         var value = game_data.get(key)
         if value is Dictionary:
             var dict := value as Dictionary
-            if dict.empty():
-                if not game_data.erase(key):
-                    print("Tried to erase a non-existent game data key '%s'!" % key)
+            if dict.empty() and not game_data.erase(key):
+                print("Tried to erase a non-existent game data key '%s'!" % key)
+    self.game_data["level"] = self.current_level
 
     save_data(save_name, game_data)
     
@@ -90,6 +91,7 @@ func load_game(save_name: String) -> bool:
     if loaded_data.empty():
         return false
     self.game_data = loaded_data
+    self.current_level = self.game_data.get("level", FIRST_LEVEL)
     return true
 
 func save_file_exists(save_name: String) -> bool:
