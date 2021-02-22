@@ -95,12 +95,9 @@ A< >B
 - [x] 💛 Menu sounds
 - [x] 💙 Sound configuration for the menu
 - [x] 💛 Player hit sound
-- [x] 💛 Player death sound
+- [x] 💛 Player death sound (= lose sound)
 - [x] 💛 Screaming sound
-- [ ] 💛 Win sound
-- [ ] 💛 Lose sound
-- [ ] 💛 Main menu music
-- [ ] 💛 World music (including when the game is paused between levels)
+- [x] 💛 Win sound
 - [ ] 💟💜 Cover image (630x500 or upscaled 315x250)
 - [ ] 💟💜 Screenshots
 - [ ] 💙💜 Player trail particle effects
@@ -109,6 +106,8 @@ A< >B
 ### Advanced features
 
 - [ ] 💙 Split the player movement code away from the rest of the player code
+- [ ] 💛 Main menu music
+- [ ] 💛 World music (including when the game is paused between levels)
 - [ ] 💙 More levels
 - [ ] 💙 The progress is saved automatically after each level. At the end of the level, the player is given two
   options: 'Next level' and 'Main menu'. Also, the player should be informed that the progress has been saved. Note that
