@@ -102,7 +102,7 @@ A< >B
 - [x] 💙💜 Icon-based HP bar
 - [x] 💙 More levels
 - [x] 💙 Ability to load the progress with a 'Continue' button (visible only if there's already a saved game).
-- [ ] 💟💜 Cover image (630x500 or upscaled 315x250)
+- [x] 💟💜 Cover image (630x500 or upscaled 315x250)
 - [ ] 💟💜 Screenshots
 - [ ] 💟 Publish `0.2`
 
