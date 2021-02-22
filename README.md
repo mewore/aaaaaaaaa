@@ -99,9 +99,10 @@ A< >B
 - [x] 💛 Screaming sound
 - [x] 💛 Win sound
 - [x] 💛 Jump sound
+- [ ] 💙💜 Icon-based HP bar
+- [ ] 💙 More levels
 - [ ] 💟💜 Cover image (630x500 or upscaled 315x250)
 - [ ] 💟💜 Screenshots
-- [ ] 💙 More levels
 - [ ] 💟 Publish `0.2`
 
 ### Advanced features
