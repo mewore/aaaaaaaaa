@@ -7,6 +7,7 @@ onready var OPTION_CONTAINER := $OptionWrapper/OptionContainer as OptionContanie
 var GAME_TITLE := ProjectSettings.get("application/config/name") as String
 
 const NEW_GAME_OPTION := "Start new game"
+const CONTINUE_OPTION := "Continue"
 const SFX_VOLUME_SETTING_LABEL := "SFX"
 var SFX_VOLUME_SLIDER := SliderMenuItem.new("SFX")
 const EXIT_OPTION := "Exit"
@@ -20,6 +21,8 @@ onready var FADE_OVERLAY := $FadeOverlay as FadeOverlay
 
 func _ready() -> void:
     var main_menu_items := [BasicMenuItem.new(NEW_GAME_OPTION), SFX_VOLUME_SLIDER]
+    if Global.save_file_exists(Global.DEFAULT_SAVE_FILE):
+        main_menu_items.push_front(BasicMenuItem.new(CONTINUE_OPTION))
     if not OS.has_feature("web"):
         main_menu_items.append(BasicMenuItem.new(EXIT_OPTION))
     MAIN_MENU_ITEM_SET.items = main_menu_items
@@ -44,6 +47,10 @@ func _on_OptionContainer_option_selected(_option_index: int, option: String) -> 
     match active_menu:
         MAIN_MENU_ITEM_SET:
             match option:
+                CONTINUE_OPTION:
+                    FADE_OVERLAY.fade_out()
+                    yield(FADE_OVERLAY, "faded_out")
+                    self.start_game(Global.DEFAULT_SAVE_FILE)
                 NEW_GAME_OPTION:
                     FADE_OVERLAY.fade_out()
                     yield(FADE_OVERLAY, "faded_out")

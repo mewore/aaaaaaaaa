@@ -23,7 +23,7 @@ func new_game() -> void:
     Global.current_level = FIRST_LEVEL
     self.game_data = {}
 
-func save_game(save_name: String, save_to_overwrite: String = "") -> void:
+func save_game(save_name: String = DEFAULT_SAVE_FILE, save_to_overwrite: String = "") -> void:
     for _node in get_tree().get_nodes_in_group("saveable"):
         var node := _node as Node
         if node.has_method("save_data"):
@@ -83,7 +83,7 @@ func open_save_directory() -> Directory:
     LOG.check_error_code(dir.open(SAVE_DIRECTORY), "Opening " + SAVE_DIRECTORY)
     return dir
 
-func load_game(save_name: String) -> bool:
+func load_game(save_name: String = DEFAULT_SAVE_FILE) -> bool:
     if not self.save_file_exists(save_name):
         LOG.error("No such savefile: " + save_name)
         return false

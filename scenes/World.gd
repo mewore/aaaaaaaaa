@@ -87,12 +87,12 @@ func _on_PauseOptionContainer_option_selected(_option_index: int, option: String
             FADE_OVERLAY.fade_out()
             yield(FADE_OVERLAY, "faded_out")
             self.paused = false
+            Global.current_level -= 1
             LOG.check_error_code(get_tree().reload_current_scene(), "Reloading the world")
         NEXT_LEVEL_OPTION:
             FADE_OVERLAY.fade_out()
             yield(FADE_OVERLAY, "faded_out")
             self.paused = false
-            Global.current_level += 1
             LOG.check_error_code(get_tree().reload_current_scene(), "Reloading the world")
         MAIN_MENU_OPTION:
             FADE_OVERLAY.fade_out()
@@ -106,6 +106,8 @@ func _on_PauseOptionContainer_option_selected(_option_index: int, option: String
 func _on_Player_won() -> void:
     LEVEL_OVER_OPTION_CONTAINER.title = "You win!"
     LEVEL_OVER_OPTION_CONTAINER.options = PoolStringArray([NEXT_LEVEL_OPTION, MAIN_MENU_OPTION])
+    Global.current_level += 1
+    Global.save_game()
     self.paused = true
 
 func _on_Player_reached_win_area() -> void:

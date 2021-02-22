@@ -101,7 +101,7 @@ A< >B
 - [x] 💛 Jump sound
 - [x] 💙💜 Icon-based HP bar
 - [x] 💙 More levels
-- [ ] 💙 Ability to load the progress with a 'Continue' button (visible only if there's already a saved game).
+- [x] 💙 Ability to load the progress with a 'Continue' button (visible only if there's already a saved game).
 - [ ] 💟💜 Cover image (630x500 or upscaled 315x250)
 - [ ] 💟💜 Screenshots
 - [ ] 💟 Publish `0.2`
