@@ -56,7 +56,7 @@ onready var ROOT_ANIMATION_PLAYER: AnimationPlayer = $AnimationPlayer
 
 const MAX_HP := 1.0
 var hp := 1.0 setget set_hp
-onready var HP_BAR := $HpBar as HpBar
+onready var HP_BAR := $HpBar as Bar
 export(Curve) var HP_BAR_OPACITY_CURVE: Curve
 
 export(float) var HIT_DOWNWARD_SPEED := JUMP_SPEED
@@ -65,7 +65,7 @@ onready var HURT_SOUND := $HurtSound as AudioStreamPlayer
 
 func set_hp(new_hp: float) -> void:
     hp = new_hp
-    HP_BAR.set_hp_ratio(hp)
+    HP_BAR.ratio = hp
     if HP_BAR_OPACITY_CURVE:
         HP_BAR.modulate.a = HP_BAR_OPACITY_CURVE.interpolate_baked(hp)
 

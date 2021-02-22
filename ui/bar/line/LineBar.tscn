@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/bar/Bar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/bar/line/LineBar.gd" type="Script" id=2]
+
+[node name="LineBar" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+invisible_when_full = true
+ratio = 1.0
+full_colour = Color( 0.5, 1, 0.83, 1 )
+empty_colour = Color( 0.8, 0.36, 0.36, 1 )
+
+[node name="Outer" type="Line2D" parent="Wrapper" index="0"]
+points = PoolVector2Array( -16, 0, 16, 0 )
+width = 7.0
+default_color = Color( 0, 0, 0, 0.733333 )
+
+[node name="Inner" type="Line2D" parent="Wrapper" index="1"]
+position = Vector2( -15, 0 )
+points = PoolVector2Array( 0, 0, 30, 0 )
+width = 5.0
+default_color = Color( 0.5, 1, 0.83, 1 )

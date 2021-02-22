@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://entities/advanced-camera2d/AdvancedCamera2D.gd"
 }, {
+"base": "Node2D",
+"class": "Bar",
+"language": "GDScript",
+"path": "res://ui/bar/Bar.gd"
+}, {
 "base": "MenuItem",
 "class": "BasicMenuItem",
 "language": "GDScript",
@@ -48,11 +53,6 @@ _global_script_classes=[ {
 "class": "GameSettings",
 "language": "GDScript",
 "path": "res://GameSettings.gd"
-}, {
-"base": "Node2D",
-"class": "HpBar",
-"language": "GDScript",
-"path": "res://entities/hp-bar/HpBar.gd"
 }, {
 "base": "Node2D",
 "class": "InputPreview",
@@ -117,13 +117,13 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "A": "",
 "AdvancedCamera2D": "",
+"Bar": "",
 "BasicMenuItem": "",
 "FadeOverlay": "",
 "FallingBlock": "",
 "FallingBlockContainer": "",
 "FallingBlockSettings": "",
 "GameSettings": "",
-"HpBar": "",
 "InputPreview": "",
 "Log": "",
 "MenuItem": "",

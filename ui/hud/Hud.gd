@@ -4,7 +4,7 @@ onready var TIME_LABEL := $ControlScrambleTimer as TimeLabel
 export(Color) var TIME_WARNING_COLOUR: Color
 onready var NORMAL_TIME_COLOUR = TIME_LABEL.self_modulate
 
-onready var HP_BAR := $HpBarWrapper/HpBarControl/HpBar as HpBar
+onready var HP_BAR := $HpBarWrapper/HpBarControl/HpBar as Bar
 
 onready var DAMAGE_TAKEN_LABEL := $DamageTaken as Label
 export(int) var DAMAGE_TAKEN_SYMBOLS_PER_LINE := 10
@@ -16,7 +16,7 @@ onready var PLAYER := get_node_or_null(PLAYER_NODE) as Player
 
 func _process(_delta: float) -> void:
     if PLAYER:
-        HP_BAR.set_hp_ratio(PLAYER.hp / Player.MAX_HP)
+        HP_BAR.ratio = PLAYER.hp / Player.MAX_HP
 
 func _on_World_active_timer_changed(new_active_timer: Timer) -> void:
     TIME_LABEL.timer = new_active_timer
