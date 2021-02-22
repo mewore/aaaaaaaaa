@@ -87,7 +87,6 @@ func _on_PauseOptionContainer_option_selected(_option_index: int, option: String
             FADE_OVERLAY.fade_out()
             yield(FADE_OVERLAY, "faded_out")
             self.paused = false
-            Global.current_level -= 1
             LOG.check_error_code(get_tree().reload_current_scene(), "Reloading the world")
         NEXT_LEVEL_OPTION:
             FADE_OVERLAY.fade_out()
